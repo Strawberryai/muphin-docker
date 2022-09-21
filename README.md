@@ -1,19 +1,25 @@
 
-# Docker LAMP
-Linux + Apache + MariaDB (MySQL) + PHP 7.2 on Docker Compose. Mod_rewrite enabled by default.
+# Muphin Docker
+Este proyecto se trata de una aplicación web sobre muphins alojada en un
+conjunto de servicios corriendo en contenedores Docker. En concreto, este
+sistema está basado en una arquitectura Linux + Apache + MariaDB (MySQL) + PHP 7.2 en Docker Compose. 
 
-## Instructions
+## Instrucciones para iniciar el sistema
 
-Enter the following command to start your containers:
+Introduce los siguientes comandos para iniciar los contenedores:
 ```bash
+$ docker build -t="web" .  # si la imagen no está buildeada
 $ docker-compose up -d
 ```
 
-To stop them, use this:
+> ==Nota importante==: En macOS tuve que añadir la primera línea "services:" en el
+> archivo `docker-compose.yml`.
+
+Para parar los servicios:
 ```bash
 $ docker-compose stop
 ```
 
-Feel free to make pull requests and help to improve this.
-
-If you are looking for phpMyAdmin, take a look at [this](https://github.com/celsocelante/docker-lamp/issues/2).
+Una vez iniciado el sistema deberían funcionar las siguientes urls:
+    - [http://localhost:81](http://localhost:81)
+    - [http://localhost:8890](http://localhost:8890)
