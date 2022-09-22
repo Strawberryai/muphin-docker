@@ -56,22 +56,22 @@ funcionalidades:
 Este es el apartado en el que definimos un reparto de tareas inicial:
 
 1. Casos de uso e interfaces de la aplicación (conjunto) (DEADLINE: 22/9/2022)
-    a. Interfaz Main (Alan)
-    b. Interfaz Sign in (Adrián)
-    c. Interfaz Sign up (Álvaro)
-    d. Interfaz Modificar datos usuario (Alan)
-    e. Interfaz Catálogo / Modificar datos elementos / Eliminar elementos (Álvaro)
-    f. Interfaz Añadir datos catálogo (Adrián)
+    1. Interfaz Main (Alan)
+    2. Interfaz Sign in (Adrián)
+    3. Interfaz Sign up (Álvaro)
+    4. Interfaz Modificar datos usuario (Alan)
+    5. Interfaz Catálogo / Modificar datos elementos / Eliminar elementos (Álvaro)
+    6. Interfaz Añadir datos catálogo (Adrián)
 
 2. Diseñar e implementar la estructura de la base de datos (según el enunciado
    son tablas independientes)
-    a. Tabla usuarios
-    b. Tabla muphins
+    1. Tabla usuarios
+    2. Tabla muphins
 
 3. Diseñar e implementar el backend con PHP
-    a. Implementar un Router.php
-    b. Implementar un Database.php
-    c. Implementar un Muphin.php
-    d. Implementar un Usuario.php
-    e. Implementar index.php (entrada principal)
+    1. Implementar un Router.php
+    2. Implementar un Database.php
+    3. Implementar un Muphin.php
+    4. Implementar un Usuario.php
+    5. Implementar index.php (entrada principal)
 
