@@ -19,6 +19,8 @@
         }
 
         private function send_query_db($select_instr){
+            // comprobar que la instrucción no es una inyección SQL
+
             $query = mysqli_query($this->conn, $select_instr)
                 or die (mysqli_error($this->conn));
             return mysqli_fetch_array($query);
@@ -33,10 +35,12 @@
         }
 
         public function comprobar_identidad($user, $pass){
+            // Validar datos antes de realizar peticiones
+            
             $query = $this->send_query_db("SELECT password FROM usuarios WHERE username='" . $user . "' ");
             $identified = false;
 
-            if(strcmp($pass, $query['password']) == 0){
+            if(isset($query['password']) and strcmp($pass, $query['password']) == 0){
                 $identified = true;
             }
 
