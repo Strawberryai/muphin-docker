@@ -28,17 +28,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nombre` text NOT NULL
+  `user_id` int NOT NULL,
+  `username` text NOT NULL,
+  `password` text NOT NULL,
+  `nombre_apellidos` text NOT NULL,
+  `DNI` text NOT NULL,
+  `telf` int(9) NOT NULL,
+  `e-mail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`) VALUES
-(1, 'mikel'),
-(2, 'aitor');
+INSERT INTO `usuarios` (`user_id`, `username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `e-mail`) VALUES
+('1', 'Mikel001', 'test', 'Mikel García', '11111111-Z', '111111111', 'mikel001@mail.com'),
+('2', 'Mikel002', 'test', 'Mikel García2', '22222222-Z', '222222222', 'mikel002@mail.com'),
+('3', 'Mikel003', 'test', 'Mikel García3', '33333333-Z', '333333333', 'mikel003@mail.com'),
+('4', 'Aitor001', 'test', 'Aitor Viñedo', '11111111-Z', '111111111', 'aitor001@mail.com');
 
 --
 -- Índices para tablas volcadas
@@ -48,7 +56,7 @@ INSERT INTO `usuarios` (`id`, `nombre`) VALUES
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
