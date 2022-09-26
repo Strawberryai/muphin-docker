@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <script defer src="registro.js"></script>
     </head>
     <title>
         Prueba de html antifurros
@@ -12,33 +13,43 @@
                 <a>Registro</a>
             </li>
             <h2>
-                
-                <form>
-                    <label>
+                <div id="error"></div>
+                <form id="form" action="/" method="POST">
+                    <label for="nombre">
                         Nombre
                     </label>
-                    <input type="text" value="Pablo">
+                    <input id="nombre" name="nombre" type="text" placeholder="Pablo">
                     <br> 
-                    <label>
+                    <label for="contraseña">
+                        Contraseña
+                    </label>
+                    <input id="contraseña" name="contraseña" type="password" placeholder="contraseña">
+                    <br>
+                    <label for="contraseña2">
+                        Repetir contraseña
+                    </label>
+                    <input id="contraseña2" name="contraseña2" type="password" placeholder="contraseña">
+                    <br> 
+                    <label for="dni">
                         DNI
                     </label> 
-                    <input type="text" value="0000000A"> 
+                    <input id="dni" name="dni" type="text" placeholder="12345678A" > 
                     <br> 
                     <label>
                         Telefono
-                    </label> 
-                    <input type="text" value="623242032">  
+                    </label for="telefono"> 
+                    <input id="telefono" name="telefono" type="number" placeholder="616111111" >  
                     <br> 
                     <label>
                         Fecha de nacimiento
-                    </label> 
-                    <input type="date"value="2000-01-01"min="1900-01-01" max="2023-01-01">  
+                    </label for="fechaNac"> 
+                    <input id="fechaNac" name="fechaNac" type="date"min="1900-01-01" max="2023-01-01" placeholder="2002-08-08">  
                     <br> 
                     <label>
                         Email
-                    </label> 
-                    <input type="text" value="ejemplo@email.com">   
-                    <button type="button">Registrar</button>
+                    </label for="email"> 
+                    <input id="email" name="email" type="text" placeholder="ejemplo@email.com">   
+                    <button type="submit">Registrar</button>
                 </form>
                     
                 
