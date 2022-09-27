@@ -64,31 +64,33 @@ form.addEventListener("submit",function(e){
         e.preventDefault()
         errorElement.innerText=messages.join(', ')
     }
-    let formulario=new FormData(document.getElementById("form"));
-    e.preventDefault()
-    fetch("registro.php",{
-        method: "POST",
-        body: formulario
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        if(data=="true"){
-            document.getElementById("nombre").value="";
-            document.getElementById("contraseña").value="";
-            document.getElementById("contraseña2").value="";
-            document.getElementById("dni").value="";
-            document.getElementById("telefono").value="";
-            document.getElementById("fechaNac").value="";
-            document.getElementById("email").value="";
-            document.getElementById("form").value="";
-            document.getElementById("error").value="";
-            alert("El usuario se registró");
-        }
-        else{
-            console.log(data);
-        }
-    })
-
+    else{
+        window.alert("Los datos del registro son correctos")
     
+        let formulario=new FormData(document.getElementById("form"));
+        fetch("registro.php",{
+            method: "POST",
+            body: formulario
+     })/*
+        .then(res=>res.json())
+        .then(data=>{
+            if(data=="true"){
+                document.getElementById("nombre").value="";
+                document.getElementById("contraseña").value="";
+                document.getElementById("contraseña2").value="";
+                document.getElementById("dni").value="";
+                document.getElementById("telefono").value="";
+                document.getElementById("fechaNac").value="";
+                document.getElementById("email").value="";
+                document.getElementById("form").value="";
+                document.getElementById("error").value="";
+                alert("El usuario se registró");
+            }
+            else{
+                console.log(data);
+            }
+        })*/
+
+    }
 
 }) 

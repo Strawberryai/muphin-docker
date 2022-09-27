@@ -7,7 +7,7 @@ $fechaNac= isset($_POST["fechaNac"])? $_POST["fechaNac"]:"";
 $email = isset($_POST["email"])? $_POST["email"]:"";
 
 try{
-    $conexion =new PDO('mysql:host=localhost;port=8890;dbname=database','root','');
+    $conexion =new mysqli("'localhost;port=8890:80;dbname=database','root',''");
     $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 
