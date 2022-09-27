@@ -1,21 +1,13 @@
 <?php
 require 'data_base.php';
 session_start();
-
-$log;
-
-if (isset($_SESSION['user'])) {
-    $log = "<a href='log_out.php'>LOG OUT</a>";
-
-} else {
-    $log = "<a href='log_in.php'>LOG IN</a>";
-}
 ?>
 
 <style>
 :root{
     --bg-a: #F5F5F5;
-    --bg-b: #333;
+    --bg-b: #22262c;
+    --bg-c: #171a1e;
 
     --bg-active: #FFAB00;
     --bg-barhover: #111;
@@ -28,17 +20,17 @@ if (isset($_SESSION['user'])) {
 
 body{
     background: var(--bg-a);
+    margin: 0;
 }
 
 a{
     text-decoration: none;
 }
 
+/* Navbar styles */
+
 #top_bar{
     background: var(--bg-b);
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: min-content;
     list-style-type: none;
@@ -52,7 +44,7 @@ a{
     padding:1rem 2rem;
 }
 
-a{
+.bar_elm a{
     color: var(--text-b)
 }
 
@@ -60,17 +52,49 @@ a{
     background: var(--bg-barhover);
 }
 
-.bar_user{
-    float: right;
-}
-
 .active{
     background: var(--bg-active);
 }
 
+/* Dropdown menu */
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown a{
+    color: var(--text-b);
+}
+
+.dropbtn{
+    padding-left: 1.2rem;
+}
+
+.dropdown-content {
+    visibility: hidden;
+    position: absolute;
+    background-color: var(--bg-b); 
+    color: var(--text-b);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    right: 0;
+    left: auto;
+    top: 3.1rem;
+    z-index: 1;
+    height: 0;
+    transition: height 0.07s ease-out;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content{
+    visibility: visible;
+    height: 75px;
+}
+
 #content{
     margin-top: 9rem;
-
 }
 
 </style>
@@ -83,9 +107,21 @@ a{
             <li class="bar_elm active"><a href="#">Inicio</a></li>
             <li class="bar_elm"><a href="#">Catálogo</a></li>
             <li class="bar_elm"><a href="#">Sobre nosotros</a></li>
-            <li class="bar_elm bar_user">
-                    <?php echo $log; ?>
-            </li>
+
+            <?php if (!isset($_SESSION['user'])) { ?>
+            <li class="bar_elm" style="float: right;"><a href='log_in.php'>LOG IN</a></li>
+
+            <?php } else { ?>
+                <div class="dropdown">
+                    <a class="dropbtn bar_elm">Opciones</a>
+                    <div class="dropdown-content">
+                        <div>Signed in as</div>
+                        <div><?php echo $_SESSION['user'];?></div></br>
+                        <a href='perfil.php'>PERFIL</a></br>
+                        <a href='log_out.php'>LOG OUT</a>
+                    </div>
+                </div>
+                <?php } ?>
         </nav>
 
         <div id="content">
