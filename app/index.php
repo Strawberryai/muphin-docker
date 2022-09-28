@@ -1,8 +1,9 @@
+<?php 
+session_start()
+?>
+
 <!-- Entrada principal de la página web -->
 <!-- Alan García Justel -->
-<?php
-    session_start();
-?>
 
 <html>
     <header>
@@ -12,7 +13,7 @@
     </header>
     <body>
         <!-- Incluimos la barra del menú -->
-        <?php include("components/nav_bar.php")?>
+        <?php require_once("components/nav_bar.php")?>
 
         <!-- Definimos la estructura de la página principal -->
         <div id="content">

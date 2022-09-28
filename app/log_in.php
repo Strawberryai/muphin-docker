@@ -9,15 +9,15 @@ if(isset($_SESSION['user'])){
 }elseif(isset($_POST['login'])){
     // Se ha enviado una petición de log in
     $user = $_POST['username'];
-    $pass = $_POST['password'];
 
     // Comprobamos si los datos están en nuestra base de datos
     $db = database::getInstance();
-    $identified = $db->comprobar_identidad($user, $pass);
+    $identified = $db->comprobar_identidad($user, $_POST['password']);
 
     if($identified){
         // iniciamos la sesión y volvemos a la página principal
         $_SESSION['user'] = $user;
+
         header('Location:index.php');
     }else{
         // Avisamos de que no se ha podido iniciar la sesión

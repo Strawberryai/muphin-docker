@@ -34,7 +34,7 @@ CREATE TABLE `usuarios` (
   `nombre_apellidos` text NOT NULL,
   `DNI` text NOT NULL,
   `telf` int(9) NOT NULL,
-  `e-mail` text NOT NULL
+  `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -42,7 +42,7 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`user_id`, `username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `e-mail`) VALUES
+INSERT INTO `usuarios` (`user_id`, `username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`) VALUES
 ('1', 'Mikel001', 'test', 'Mikel García', '11111111-Z', '111111111', 'mikel001@mail.com'),
 ('2', 'Mikel002', 'test', 'Mikel García2', '22222222-Z', '222222222', 'mikel002@mail.com'),
 ('3', 'Mikel003', 'test', 'Mikel García3', '33333333-Z', '333333333', 'mikel003@mail.com'),
