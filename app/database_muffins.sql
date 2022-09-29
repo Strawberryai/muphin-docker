@@ -41,7 +41,7 @@ CREATE TABLE `muffins` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `imagen`, `titulo`, `desc`,`likes`,`user_prop`) VALUES
+INSERT INTO `muffins` (`id`, `imagen`, `titulo`, `desc`,`likes`,`user_prop`) VALUES
 ('1', 'Muffin001', 'test', 'Muffin choco','0','Mikel001'),
 ('2', 'Muffin002', 'test', 'Muffin fresa','0','Mikel001'),
 ('3', 'Muffin003', 'test', 'Muffin integral','0','Mikel001'),
