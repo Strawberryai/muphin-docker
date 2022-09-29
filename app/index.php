@@ -1,5 +1,5 @@
 <?php 
-session_start()
+session_start();
 ?>
 
 <!-- Entrada principal de la página web -->

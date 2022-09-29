@@ -1,5 +1,5 @@
 <?php
-require 'data_base.php';
+require 'Database.php';
 session_start();
 
 if(isset($_SESSION['user'])){
@@ -11,7 +11,7 @@ if(isset($_SESSION['user'])){
     $user = $_POST['username'];
 
     // Comprobamos si los datos están en nuestra base de datos
-    $db = database::getInstance();
+    $db = Database::getInstance();
     $identified = $db->comprobar_identidad($user, $_POST['password']);
 
     if($identified){

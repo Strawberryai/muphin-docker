@@ -2,8 +2,8 @@
 // Pagina para modificar los datos del usuario
 session_start();
 
-require('data_base.php');
-$db = database::getInstance();
+require('Database.php');
+$db = Database::getInstance();
 
 if(!isset($_SESSION['user'])){
     // No se ha iniciado sesión -> Volvemos a la página principal
@@ -27,18 +27,23 @@ if(!isset($_SESSION['user'])){
 
             if(!isset($error)){
                 // Si no hay error modificamos la sesión y volvemos a la página principal
+                session_destroy();
+                session_start();
+                $_SESSION['user'] = $datos['username'];
                 
-                // TODO: hay que actualizar la sesion acutal
                 header("Location:index.php");
             }
 
             // TODO: hacemos algo con el error
+            echo $error;
 
         }else{
             echo "ERROR: contraseña inválida -- perfil.php";
         }
     }else{
-        echo "ERROR: no hay datos en la peticion -- perfil.php";
+        // Si no hay datos en la petición se ha recargado la página o se ha
+        // llegado por error -> Volvemos a la página principal
+        header("Location:index.php");
     }
 
 
@@ -48,7 +53,7 @@ if(!isset($_SESSION['user'])){
     unset($datos);
 
     $datos['username'] = $_POST['username'];
-    $datos['password'] = $_POST['password'];
+    $datos['password'] = strcmp($_POST['password'], $_POST['password2']) == 0 ? $_POST['password'] : NULL;
     $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
     $datos['DNI'] = $_POST['DNI'];
     $datos['telf'] = $_POST['telf'];
@@ -97,9 +102,9 @@ if(!isset($_SESSION['user'])){
         <input type="text" id="email" name="email" value=<?php echo "{$datos['email']}"; ?>><br><br>
 
         <label for="password">New password:</label><br>
-        <input type="password" id="password-comp" value=""><br>
-        <label for="password">Repeat password:</label><br>
         <input type="password" id="password" name="password" value=""><br><br>
+        <label for="password">Repeat password:</label><br>
+        <input type="password" id="password2" name="password2" value=""><br><br>
 
         <input type="submit" name="modificar" value="Submit">
     </form>
