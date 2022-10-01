@@ -61,6 +61,35 @@ class Database{
         return $identified;
     }
 
+    public function registrar_usuario($datos){
+        // Validamos los datos 
+        if(!Validador::val_DNI($datos['DNI'])){
+            return "ERROR: el DNI introducido no tiene el formato correcto";
+        }
+
+        if(!Validador::val_email($datos['email'])){
+            return "ERROR: el email introducido no tiene el formato correcto";
+        }
+
+        if(!Validador::val_telf($datos['telf'])){
+            return "ERROR: el teléfono introducido no tiene el formato correcto";
+        }
+
+        // Comprobar que el nombre de usuario es único
+        if(strcmp($datos['username'], "") != 0){
+            // El username no es un string vacío
+            if($this->existe_nombre_usuario($datos['username'])){
+                return "ERROR: el nombre de usuario introducido ya está registrado";
+            }
+        }else{
+            return "ERROR: el nombre de usuario no puede ser una cadena vacía";
+
+        }
+
+        $sql_ins = "INSERT INTO usuarios (username, password, nombre_apellidos, DNI, telf, email) VALUES ('{$datos['username']}', '{$datos['password']}', '{$datos['nombre_apellidos']}', '{$datos['DNI']}', '{$datos['telf']}', '{$datos['email']}')";
+        $res = $this->send_query_db($sql_ins);
+    }
+
     public function obtener_datos_usuario($user){
         // PRE: El usuario está registrado y loggeado
         // POST: Sus datos personales exceptuando la contraseña actual
@@ -76,6 +105,14 @@ class Database{
         } 
 
         return false;
+    }
+
+    public function eliminar_usuario($user){
+        $res = $this->send_query_db("DELETE FROM usuarios WHERE username='{$user}'");
+
+        if(!$res){
+            return "ERROR: no se pudo hacer el DELETE de {$user}";
+        }
     }
 
     public function modificar_datos_usuario($user, $datos){
@@ -98,15 +135,21 @@ class Database{
         }
 
         // Comprobar que el nombre de usuario es único
-        if(strcmp($user, $datos['username']) && $this->existe_nombre_usuario($datos['username'])){
-            return "ERROR: el nombre de usuario introducido ya está registrado";
+        if(strcmp($datos['username'], "") != 0){
+            // El username no es un string vacío
+            if(strcmp($user, $datos['username']) != 0 && $this->existe_nombre_usuario($datos['username'])){
+                return "ERROR: el nombre de usuario introducido ya está registrado";
+            }
+        }else{
+            return "ERROR: el nombre de usuario no puede ser una cadena vacía";
+
         }
 
         $sql_params = "username='{$datos['username']}', DNI='{$datos['DNI']}', telf='{$datos['telf']}', email='{$datos['email']}'";
 
         // Si no hemos introducido una contraseña valida, mantenemos la
         // anterior
-        if(!is_null($datos['password'])){
+        if(isset($datos['password']) && strcmp($datos['password'], "") != 0){
             $sql_params = $sql_params . ", password='{$datos['password']}'";
         }
 
@@ -116,7 +159,6 @@ class Database{
 
         if(!$res){
             return "ERROR: el UPDATE no se pudo realizar";
-
         }
     }
 

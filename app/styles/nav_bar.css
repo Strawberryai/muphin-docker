@@ -1,26 +1,3 @@
-:root{
-    --bg-a: #F5F5F5;
-    --bg-b: #22262c;
-    --bg-c: #171a1e;
-
-    --bg-active: #FFAB00;
-    --bg-barhover: #111;
-
-    --text-a: #000;
-    --text-b: #fff;
-
-    font-family: Arial;
-} 
-
-body{
-    background: var(--bg-a);
-    margin: 0;
-}
-
-a{
-    text-decoration: none;
-}
-
 /* Navbar styles */
 
 #top_bar{

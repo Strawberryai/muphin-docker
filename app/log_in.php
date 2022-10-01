@@ -27,11 +27,34 @@ if(isset($_SESSION['user'])){
 
 ?>
 
-<form action="log_in.php" method="POST">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" value=""><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" value=""><br><br>
-    <input type="submit" name="login" value="Submit">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Muffin</title>
+        <link rel="icon" href="/images/muffin.ico">
+
+        <!-- Incluimos los estilos necesarios -->
+        <link rel="stylesheet" href="/styles/common.css?version=0.1">
+        <link rel="stylesheet" href="/styles/nav_bar.css?version=0.1">
+
+        <!-- Incluimos unas fuentes online -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <!-- Incluimos la barra del menú -->
+        <?php require_once("components/nav_bar.php")?>
+
+        <form action="log_in.php" method="POST">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" value=""><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" value=""><br><br>
+            <input type="submit" name="login" value="Submit">
+        </form>
+
+    </body>
+</html>
 

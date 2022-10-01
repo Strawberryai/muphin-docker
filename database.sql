@@ -28,13 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `usuarios` (
-  `user_id` int NOT NULL,
+  `user_id` int NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL,
   `password` text NOT NULL,
   `nombre_apellidos` text NOT NULL,
   `DNI` text NOT NULL,
   `telf` int(9) NOT NULL,
-  `email` text NOT NULL
+  `email` text NOT NULL,
+  PRIMARY KEY(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -42,11 +43,11 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`user_id`, `username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`) VALUES
-('1', 'Mikel001', 'test', 'Mikel García', '11111111-Z', '111111111', 'mikel001@mail.com'),
-('2', 'Mikel002', 'test', 'Mikel García2', '22222222-Z', '222222222', 'mikel002@mail.com'),
-('3', 'Mikel003', 'test', 'Mikel García3', '33333333-Z', '333333333', 'mikel003@mail.com'),
-('4', 'Aitor001', 'test', 'Aitor Viñedo', '11111111-Z', '111111111', 'aitor001@mail.com');
+INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`) VALUES
+('Mikel001', 'test', 'Mikel García', '11111111-Z', '111111111', 'mikel001@mail.com'),
+('Mikel002', 'test', 'Mikel García2', '22222222-Z', '222222222', 'mikel002@mail.com'),
+('Mikel003', 'test', 'Mikel García3', '33333333-Z', '333333333', 'mikel003@mail.com'),
+('Aitor001', 'test', 'Aitor Viñedo', '11111111-Z', '111111111', 'aitor001@mail.com');
 
 --
 -- Índices para tablas volcadas
@@ -55,9 +56,9 @@ INSERT INTO `usuarios` (`user_id`, `username`, `password`, `nombre_apellidos`, `
 --
 -- Indices de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`user_id`);
-COMMIT;
+-- ALTER TABLE `usuarios`
+--   ADD PRIMARY KEY (`user_id`);
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

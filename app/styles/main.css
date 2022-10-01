@@ -1,5 +1,31 @@
 /* Content page styles */
 #content{
-    margin-top: 9rem;
+    padding: 2rem;
+    background: #006b9b;
 }
 
+#main-space{
+    display: inline-block;
+    margin-top: 7rem;
+}
+
+#title{
+    color: var(--text-a);
+    font-size: 80pt;
+}
+
+#hi{
+    opacity: 0.0;
+    display: inline-block;
+    transform: translateY(3rem);
+    transition: transform 1s ease-in, opacity 1s ease-in;
+}
+
+#muf{
+    opacity: 0.0;
+    display: inline-block;
+    transition: opacity 1s ease-in;
+}
+
+#muffin{
+}
