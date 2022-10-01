@@ -60,25 +60,34 @@ if(isset($_SESSION['user'])){
         <form id="form" action="register.php" method="POST">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" value=<?php echo "{$datos['username']}"; ?>><br>
+            <span id=errorUsername style="color:red"></span><br>
 
             <label for="nombre_apellidos">Nombre y apellidos:</label><br>
             <input type="text" id="nombre_apellidos" name="nombre_apellidos" value=""><br>
+            <span id=errorNombreApellido style="color:red"></span><br>
 
             <label for="DNI">DNI:</label><br>
             <input type="text" id="DNI" name="DNI" value=""><br>
+            <span id=errorDni style="color:red"></span><br>
 
             <label for="telf">Teléfono:</label><br>
             <input type="text" id="telf" name="telf" value=""><br>
+            <span id=errorTelf style="color:red"></span><br>
 
             <label for="email">email:</label><br>
-            <input type="text" id="email" name="email" value=""><br><br>
+            <input type="text" id="email" name="email" value=""><br>
+            <span id=errorMail style="color:red"></span><br>
 
             <label for="password">New password:</label><br>
-            <input type="password" id="password" name="password" value=""><br><br>
-            <label for="password">Repeat password:</label><br>
-            <input type="password" id="password2" name="password2" value=""><br><br>
+            <input type="password" id="password" name="password" value=""><br>
+            <span id=errorPassword style="color:red"></span><br>
+            
 
-            <input type="button" id="button" name="register" value="Register" onClick="validar_y_enviar_datos()">
+            <label for="password">Repeat password:</label><br>
+            <input type="password" id="password2" name="password2" value=""><br>
+            <span id=errorPassword2 style="color:red"></span><br>
+
+            <button type="submit" id="button" name="register" value="Register" >Register</button>
         </form>
         <script defer src="scripts/Validador.js"></script>
         <script defer src="scripts/registro.js"></script>

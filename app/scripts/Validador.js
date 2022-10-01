@@ -2,22 +2,17 @@ class Validador{
 
 
     static comprobarDNI(dni){
-        window.alert("a")
         if(dni.value.length!=9){
           return false;
         }
-        
-        
         else{
             var enc=false;
             var letraDNI = dni.value.substring(8, 9)
             var numDNI = dni.value.substring(0, 8)
             var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T']
-    
-            if(numDNI == /\d{8}[a-z A-Z]/){
-               
-            }
-            else if(letraDNI.match(/[A-Z]/i)){
+            var letraCorrecta=letras[numDNI % 23] 
+            if(numDNI == /\d{8}[a-z A-Z]/){}
+            else if((letraDNI.match(/[A-Z]/i)&&(letraDNI==letraCorrecta))){
                 enc=true 
             }
             
@@ -26,13 +21,19 @@ class Validador{
                 window.alert("El dni no es correcto2") 
                 return false;
             }
+            else {
+                return true;
+            }
         }
     }
 
     static comprobarNum(num){
-        if((telefono.value.length!=9)||(numDNI == /\d{8}[a-z A-Z]/)){
-            window.alert("El telefono debe tener 9 numeros")
+        if((telefono.value.length!=9)||(numDNI == /\d{9}[a-z A-Z]/)){
+            
             return false;
+        }
+        else{
+            return true;
         }
     
         

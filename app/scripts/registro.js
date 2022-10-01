@@ -1,12 +1,20 @@
 let form = document.getElementById('form');
 
-let user_input = form.children.username;
-let nomape_input = form.children.nombre_apellidos;
-let DNI_input = form.children.DNI;
-let telf_input = form.children.telf;
-let email_input = form.children.email;
-let password_input = form.children.password;
-let password2_input = form.children.password2;
+let nombre= form.children.username;
+let nombre_apellidos = form.children.nombre_apellidos;
+let dni = form.children.DNI;
+let telefono= form.children.telf;
+let email = form.children.email;
+let contraseña = form.children.password;
+let contraseña2 = form.children.password2;
+let errorUsername=form.children.errorUsername;
+let errorNombreApellido=form.children.errorNombreApellido;
+let errorDni=form.children.errorDni;
+let errorTelf=form.children.errorTelf;
+let errorMail=form.children.errorMail;
+let errorPassword2=form.children.errorPassword2;
+let errorPassword=form.children.errorPassword;
+
 
 
 let button = form.children.button;
@@ -15,69 +23,40 @@ function validar_y_enviar_datos(){
     console.log("PRESSED");
 }
 
-/*
-button.addEventListener("click",function(e){
 
-    let messages=[]
-    if (nombre.value==""||contraseña.value==""||dni.value==""||telefono.value==""||email.value==""||fechaNac.value==""){
+form.addEventListener("submit",function(e){
+    error=0;
+
+    if (nombre.value==""||contraseña.value==""||dni.value==""||telefono.value==""||email.value==""/*||fechaNac.value==""*/){
         window.alert("No ha rellenado todos los campos")
-         
+        error=error+1;
     }
 
     if(contraseña.value.length<6){
-        e.preventDefault()
-        window.alert("La contraseña debe tener mas de 6 carácteres")
+        error=error+1;
+        errorPassword.innerHTML="La contraseña debe tener al menos 6 caracteres"
         
     }
     if(contraseña.value!=contraseña2.value){
-        e.preventDefault()
-        window.alert("Las contraseñas no coinciden")
-       
+        error=error+1;
+        errorPassword2.innerHTML="Las contraseñas no coinciden"
+        
     }
 
     if(!Validador.comprobarDNI(dni)){
-        e.preventDefault()
-        window.alert("El dni esta mal")
-       
+        error=error+1;
+        errorDni.innerHTML="El DNI es incorrecto"
+        
     }
     if(!Validador.comprobarNum(telefono)){
-        e.preventDefault()
-        window.alert("el num esta mal")
+        error=error+1;
+        errorTelf.innerHTML="El numero de telefono es incorrecto"
         
     }
-    if(messages.length>0){
+
+    if(error>0){
         e.preventDefault()
-        errorElement.innerText=messages.join(', ')
-    }
-    else{
-        e.preventDefault()
-        window.alert("Los datos del registro son correctos")
-        
-    
-        /*let formulario=new FormData(document.getElementById("form"));
-        fetch("registro.php",{
-            method: "POST",
-            body: formulario
-     })/*
-        .then(res=>res.json())
-        .then(data=>{
-            if(data=="true"){
-                document.getElementById("nombre").value="";
-                document.getElementById("contraseña").value="";
-                document.getElementById("contraseña2").value="";
-                document.getElementById("dni").value="";
-                document.getElementById("telefono").value="";
-                document.getElementById("fechaNac").value="";
-                document.getElementById("email").value="";
-                document.getElementById("form").value="";
-                document.getElementById("error").value="";
-                alert("El usuario se registró");
-            }
-            else{
-                console.log(data);
-            }
-        })
     }
 
 }) 
-*/
+
