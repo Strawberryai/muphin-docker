@@ -57,7 +57,7 @@ if(isset($_SESSION['user'])){
         <!-- Incluimos la barra del menú -->
         <?php require_once("components/nav_bar.php")?>
 
-        <form action="register.php" method="POST">
+        <form id="form" action="register.php" method="POST">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" value=<?php echo "{$datos['username']}"; ?>><br>
 
@@ -78,7 +78,7 @@ if(isset($_SESSION['user'])){
             <label for="password">Repeat password:</label><br>
             <input type="password" id="password2" name="password2" value=""><br><br>
 
-            <input type="button" id="button" name="register" value="Register">
+            <input type="button" id="button" name="register" value="Register" onClick="validar_y_enviar_datos()">
         </form>
         <script defer src="scripts/Validador.js"></script>
         <script defer src="scripts/registro.js"></script>
