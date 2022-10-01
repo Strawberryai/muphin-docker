@@ -38,6 +38,7 @@ if(isset($_SESSION['user'])){
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <title>Muffin</title>
         <link rel="icon" href="/images/muffin.ico">
 
@@ -52,6 +53,7 @@ if(isset($_SESSION['user'])){
 
     </head>
     <body>
+        
         <!-- Incluimos la barra del menú -->
         <?php require_once("components/nav_bar.php")?>
 
@@ -76,9 +78,10 @@ if(isset($_SESSION['user'])){
             <label for="password">Repeat password:</label><br>
             <input type="password" id="password2" name="password2" value=""><br><br>
 
-            <input type="submit" name="register" value="Register">
+            <input type="button" id="button" name="register" value="Register">
         </form>
-
+        <script defer src="scripts/Validador.js"></script>
+        <script defer src="scripts/registro.js"></script>
     </body>
 </html>
 <?php } ?>
