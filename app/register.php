@@ -64,6 +64,7 @@ if(isset($_SESSION['user'])){
 
             <label for="DNI">DNI:</label><br>
             <input type="text" id="DNI" name="DNI" value=""><br>
+            <span id="errorDNI" style="color:red;"></span>
 
             <label for="telf">Teléfono:</label><br>
             <input type="text" id="telf" name="telf" value=""><br>
@@ -76,9 +77,8 @@ if(isset($_SESSION['user'])){
             <label for="password">Repeat password:</label><br>
             <input type="password" id="password2" name="password2" value=""><br><br>
 
-            <input type="submit" name="register" value="Register">
+            <input type="submit" name="register" value="Submit">
         </form>
-
     </body>
 </html>
 <?php } ?>
