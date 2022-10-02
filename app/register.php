@@ -71,7 +71,7 @@ if(isset($_SESSION['user'])){
             <span id=errorDni style="color:red"></span><br>
 
             <label for="telf">Teléfono:</label><br>
-            <input type="text" id="telf" name="telf" value=""><br>
+            <input type="number" id="telf" name="telf" value=""><br>
             <span id=errorTelf style="color:red"></span><br>
 
             <label for="email">email:</label><br>
