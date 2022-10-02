@@ -77,7 +77,7 @@
     
             }
     
-            $sql_ins = "INSERT INTO muffins (titulo, imagen, desc, likes, user_prop) VALUES ('{$datos['titulo']}', '{$datos['imagen']}', '{$datos['desc']}', '0', '{$datos_user['username']}')";
+            $sql_ins = "INSERT INTO muffins (titulo, imagen, desc, likes, user_prop) VALUES ('{$datos['titulo']}', '{$datos['imagen']}', '{$datos['desc']}', 0 , '{$datos_user['username']}')";
             $res = $this->send_query_db($sql_ins);
         }
     
@@ -95,6 +95,14 @@
             
             $datos = $this->send_query_db("SELECT titulo, imagen, desc, likes, user_prop from muffins WHERE titulo='{$muffin}'");
             return $datos;
+        }
+
+        public function dar_like_muffin($muffin){
+            $datos = obtener_datos_muffin($muffin);
+            $sql_params = "likes='{$datos['likes']}';
+            $sql_paramAct = $sql_params++;
+            $sql_ins = "UPDATE muffins SET {$sql_paramAct} WHERE titulo='{$muffin}'";
+            $res = $this->send_query_db($sql_ins);
         }
     
         public function eliminar_muffin($muffin){
