@@ -54,6 +54,10 @@ form.addEventListener("submit",function(e){
         
     }
 
+    if(Validador.comprobarMail(email.value)){
+        errorMail.innerHTML="El mail es incorrecto"
+    }
+
     if(error>0){
         e.preventDefault()
     }
