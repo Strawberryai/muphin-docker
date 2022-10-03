@@ -68,7 +68,7 @@ if(isset($_SESSION['user'])){
 
             <label for="DNI">DNI:</label><br>
             <input type="text" id="DNI" name="DNI" value=""><br>
-            <span id=errorDni style="color:red"></span><br>
+            <span id="errorDNI" style="color:red;"></span>
 
             <label for="telf">Teléfono:</label><br>
             <input type="number" id="telf" name="telf" value=""><br>
