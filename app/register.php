@@ -45,6 +45,7 @@ if(isset($_SESSION['user'])){
         <!-- Incluimos los estilos necesarios -->
         <link rel="stylesheet" href="/styles/common.css?version=0.1">
         <link rel="stylesheet" href="/styles/nav_bar.css?version=0.1">
+        <link rel="stylesheet" href="/styles/form.css?version=0.1">
 
         <!-- Incluimos unas fuentes online -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,38 +58,57 @@ if(isset($_SESSION['user'])){
         <!-- Incluimos la barra del menú -->
         <?php require_once("components/nav_bar.php")?>
 
-        <form id="form" action="register.php" method="POST">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" value=<?php echo "{$datos['username']}"; ?>><br>
-            <span id=errorUsername style="color:red"></span><br>
+        <div id="zona-registro">
+            <form id="form" action="register.php" method="POST">
+                <div class="form-item">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" value=<?php echo "{$datos['username']}"; ?>>
+                    <span id=errorUsername style="color:red"></span>
+                </div>
 
-            <label for="nombre_apellidos">Nombre y apellidos:</label><br>
-            <input type="text" id="nombre_apellidos" name="nombre_apellidos" value=""><br>
-            <span id=errorNombreApellido style="color:red"></span><br>
+                <div class="form-item">
+                    <label for="nombre_apellidos">Nombre y apellidos:</label>
+                    <input type="text" id="nombre_apellidos" name="nombre_apellidos" placeholder="Enter your name and subname" value="">
+                    <span id=errorNombreApellido style="color:red"></span>
+                </div>
 
-            <label for="DNI">DNI:</label><br>
-            <input type="text" id="DNI" name="DNI" value=""><br>
-            <span id="errorDNI" style="color:red;"></span>
+                <div class="form-item">
+                    <label for="DNI">DNI:</label>
+                    <input type="text" id="DNI" name="DNI" placeholder="Enter your DNI" value="">
+                    <span id="errorDNI" style="color:red;"></span>
+                </div>
 
-            <label for="telf">Teléfono:</label><br>
-            <input type="number" id="telf" name="telf" value=""><br>
-            <span id=errorTelf style="color:red"></span><br>
+                <div class="form-item">
+                    <label for="telf">Teléfono:</label>
+                    <input type="tel" id="telf" name="telf" placeholder="Enter your telephone number"value="">
+                    <span id=errorTelf style="color:red"></span>
+                </div>
 
-            <label for="email">email:</label><br>
-            <input type="text" id="email" name="email" value=""><br>
-            <span id=errorMail style="color:red"></span><br>
+                <div class="form-item">
+                    <label for="email">email:</label>
+                    <input type="mail" id="email" name="email" placeholder="Enter your email" value="">
+                    <span id=errorMail style="color:red"></span>
+                </div>
 
-            <label for="password">New password:</label><br>
-            <input type="password" id="password" name="password" value=""><br>
-            <span id=errorPassword style="color:red"></span><br>
-            
+                <div class="form-item">
+                    <label for="password">New password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter a new password" value="">
+                    <span id=errorPassword style="color:red"></span>
+                </div>
+                
 
-            <label for="password">Repeat password:</label><br>
-            <input type="password" id="password2" name="password2" value=""><br>
-            <span id=errorPassword2 style="color:red"></span><br>
+                <div class="form-item">
+                    <label for="password">Repeat password:</label>
+                    <input type="password" id="password2" name="password2" placeholder="Repeat your password" value="">
+                    <span id=errorPassword2 style="color:red"></span>
+                </div>
 
-            <button type="submit" id="button" name="register" value="Register" >Register</button>
-        </form>
+                <div class="form-item">
+                    <button type="submit" id="button" name="register" value="Register" >Register</button>
+                </div>
+            </form>
+
+        </div>
         <script defer src="scripts/Validador.js"></script>
         <script defer src="scripts/registro.js"></script>
     </body>

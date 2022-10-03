@@ -13,6 +13,15 @@
     }else if(strcmp($url, "/about.php") == 0){
         $is_active['about'] = "active";
 
+    }else if(strcmp($url, "/log_in.php") == 0){
+        $is_active['log_in'] = "active";
+
+    }else if(strcmp($url, "/register.php") == 0){
+        $is_active['register'] = "active";
+
+    }else if(strcmp($url, "/perfil.php") == 0){
+        $is_active['options'] = "active";
+
     }
 ?>
 
@@ -23,13 +32,13 @@
 
     <!-- Comprobamos si la sesión se ha iniciado -->
     <?php if (!isset($_SESSION['user'])) { ?>
-    <li class="bar_elm" style="float: right;"><a href='register.php'>Register</a></li>
-    <li class="bar_elm" style="float: right;"><a href='log_in.php'>Log in</a></li>
+    <li class="bar_elm <?php echo $is_active['register']; ?>" style="float: right;"><a href='register.php'>Register</a></li>
+    <li class="bar_elm <?php echo $is_active['log_in']; ?>" style="float: right;"><a href='log_in.php'>Log in</a></li>
 
     <!-- Si se ha iniciado "imprimimos" el menú de opciones -->
     <?php } else { ?>
     <div class="dropdown">
-        <a id="nav_options" class="dropbtn bar_elm">Opciones</a>
+        <a id="nav_options" class="dropbtn bar_elm <?php echo $is_active['options']; ?>">Opciones</a>
         <div id="drop_elms" class="dropdown-content dropdown-content-hide">
             <div>Signed in as</div>
             <div><?php echo $_SESSION['user'];?></div></br>

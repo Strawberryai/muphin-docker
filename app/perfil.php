@@ -40,7 +40,7 @@ if(!isset($_SESSION['user'])){
             echo $error;
 
         }else{
-            echo "ERROR: contraseña inválida -- perfil.php";
+            $form = "<p id='error'>ERROR: contraseña inválida -- perfil.php</p>";
         }
     }else{
         // Si no hay datos en la petición se ha recargado la página o se ha
@@ -70,9 +70,14 @@ if(!isset($_SESSION['user'])){
     // Pedimos al usuario que vuelva a ingresar su contraseña
     $form = "
     <form action='perfil.php' method='POST'>
-        <label for='password'>Confirma tu contraseña:</label><br>
-        <input type='password' id='password' name='password' value=''><br><br>
-        <input type='submit' name='modificar-confirmado' value='Submit'>
+        <div class='form-item'>
+            <label for='password'>Confirma tu contraseña:</label>
+            <input type='password' id='password' name='password' value=''>
+        </input>
+        
+        <div class='form-item'>
+            <button type='submit' name='modificar-confirmado' value='Submit'>Modificar</button>
+        </div>
     </form>";
 
 }elseif(isset($_POST['eliminar-confirmado'])){
@@ -93,6 +98,9 @@ if(!isset($_SESSION['user'])){
 
         // TODO: Hacemos algo con el error
         return $error;
+
+    }else{
+        $form = "<p id='error'>ERROR: contraseña inválida -- perfil.php</p>";
     }
 
 }elseif(isset($_POST['eliminar'])){
@@ -101,9 +109,14 @@ if(!isset($_SESSION['user'])){
     unset($_POST['eliminar']);
     $form = "
     <form action='perfil.php' method='POST'>
-        <label for='password'>Confirma tu contraseña:</label><br>
-        <input type='password' id='password' name='password' value=''><br><br>
-        <input type='submit' name='eliminar-confirmado' value='Submit'>
+        <div class='form-item'>
+            <label for='password'>Confirma tu contraseña:</label>
+            <input type='password' id='password' name='password' value=''>
+        </div>
+        
+        <div class='form-item'>
+            <button type='submit' id='eliminar' name='eliminar-confirmado' value='Submit'>Eliminar</button>
+        </div>
     </form>
     ";
 }else{
@@ -116,28 +129,45 @@ if(!isset($_SESSION['user'])){
     // Enviamos el formulario con los datos a modificar
     $form = "
     <form action='perfil.php' method='POST'>
-        <label for='username'>Username:</label><br>
-        <input type='text' id='username' name='username' value='{$datos['username']}'><br>
+        <div class='form-item'>
+            <label for='username'>Username:</label>
+            <input type='text' id='username' name='username' value='{$datos['username']}'>
+        </div>
 
-        <label for='nombre_apellidos'>Nombre y apellidos:</label><br>
-        <input type='text' id='nombre_apellidos' name='nombre_apellidos' value='{$datos['nombre_apellidos']}'><br>
+        <div class='form-item'>
+            <label for='nombre_apellidos'>Nombre y apellidos:</label>
+            <input type='text' id='nombre_apellidos' name='nombre_apellidos' value='{$datos['nombre_apellidos']}'>
+        </div>
 
-        <label for='DNI'>DNI:</label><br>
-        <input type='text' id='DNI' name='DNI' value='{$datos['DNI']}'><br>
+        <div class='form-item'>
+            <label for='DNI'>DNI:</label>
+            <input type='text' id='DNI' name='DNI' value='{$datos['DNI']}'>
+        </div>
 
-        <label for='telf'>Teléfono:</label><br>
-        <input type='text' id='telf' name='telf' value='{$datos['telf']}'><br>
+        <div class='form-item'>
+            <label for='telf'>Teléfono:</label>
+            <input type='text' id='telf' name='telf' value='{$datos['telf']}'>
+        </div>
 
-        <label for='email'>email:</label><br>
-        <input type='text' id='email' name='email' value='{$datos['email']}'><br><br>
+        <div class='form-item'>
+            <label for='email'>email:</label>
+            <input type='text' id='email' name='email' value='{$datos['email']}'>
+        </div>
 
-        <label for='password'>New password:</label><br>
-        <input type='password' id='password' name='password' value=''><br><br>
-        <label for='password'>Repeat password:</label><br>
-        <input type='password' id='password2' name='password2' value=''><br><br>
+        <div class='form-item'>
+            <label for='password'>New password:</label>
+            <input type='password' id='password' name='password' value=''>
+        </div>
+        
+        <div class='form-item'>
+            <label for='password'>Repeat password:</label>
+            <input type='password' id='password2' name='password2' value=''>
+        </div>
 
-        <input type='submit' name='modificar' value='Submit'>
-        <input type='submit' name='eliminar' value='Eliminar'>
+        <div class='form-item'>
+            <button type='submit' name='modificar'>Modificar datos</button>
+            <button type='submit' id='eliminar' name='eliminar'>Eliminar usuario</button>
+        </div>
     </form>
     ";
 ?>
@@ -152,6 +182,7 @@ if(!isset($_SESSION['user'])){
         <!-- Incluimos los estilos necesarios -->
         <link rel="stylesheet" href="/styles/common.css?version=0.1">
         <link rel="stylesheet" href="/styles/nav_bar.css?version=0.1">
+        <link rel="stylesheet" href="/styles/form.css?version=0.1">
 
         <!-- Incluimos unas fuentes online -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,6 +194,8 @@ if(!isset($_SESSION['user'])){
         <!-- Incluimos la barra del menú -->
         <?php require_once("components/nav_bar.php")?>
 
-        <?php echo $form;?>
+        <div id="zona-registro">
+            <?php echo $form;?>
+        </div>
     </body>
 </html>
