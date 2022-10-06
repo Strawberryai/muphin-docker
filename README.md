@@ -4,6 +4,10 @@ Este proyecto se trata de una aplicación web sobre muphins alojada en un
 conjunto de servicios corriendo en contenedores Docker. En concreto, este
 sistema está basado en una arquitectura Linux + Apache + MariaDB (MySQL) + PHP 7.2 en Docker Compose. 
 
+## Commits de cifrado
+
+Cambios para realizar un commit cifrado
+
 ## Instrucciones para iniciar el sistema
 
 Introduce los siguientes comandos para iniciar los contenedores:

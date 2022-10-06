@@ -1,7 +1,7 @@
 /* Navbar styles */
 
 #top_bar{
-    background: var(--bg-b);
+    background: var(--bg-a);
     width: 100%;
     height: min-content;
     list-style-type: none;
@@ -43,7 +43,7 @@
 .dropdown-content {
     visibility: hidden;
     position: absolute;
-    background-color: var(--bg-b); 
+    background-color: var(--bg-a); 
     color: var(--text-b);
     padding-top: 2rem;
     padding-bottom: 2rem;
