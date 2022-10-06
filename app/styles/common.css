@@ -13,6 +13,8 @@
 
     --red: #ff5555;
 
+    --a-link: #2edba5;
+
     /*tiempos de animaciones*/
     --title-hi: 0.5s;
     --title-muf: 0.5s;
@@ -30,5 +32,6 @@ body{
 
 a{
     text-decoration: none;
+    color: var(--a-link);
 }
 
