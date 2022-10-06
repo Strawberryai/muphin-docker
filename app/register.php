@@ -104,13 +104,14 @@ if(isset($_SESSION['user'])){
                 </div>
 
                 <div class="form-item">
-                    <button type="submit" id="button" name="register" value="Register" >Register</button>
+                    <button type="button" id="button" name="register" value="Register" onclick="validar_y_enviar_datos()">Register</button>
                 </div>
             </form>
 
         </div>
         <script defer src="scripts/Validador.js"></script>
-        <script defer src="scripts/registro.js"></script>
+        <script defer src="scripts/forms.js"></script>
     </body>
 </html>
 <?php } ?>
+
