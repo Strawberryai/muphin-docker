@@ -127,7 +127,7 @@ class Database{
         }
 
         if(!Validador::val_email($datos['email'])){
-            return "ERROR: el email introducido no tiene el formato correcto";
+            return "ERROR: el email introducido no tiene el formato correcto -> {$datos['email']}";
         }
 
         if(!Validador::val_telf($datos['telf'])){

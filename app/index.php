@@ -28,15 +28,46 @@ session_start();
         <?php require_once("components/nav_bar.php")?>
 
         <!-- Definimos la estructura de la página principal -->
-        <section id="content">
-            <div id="main-space">
-                <div id="title"><div id="hi">Hi</div> <div id="muf">muffin!</div></div>
-                <div id="muffin">
+        <section id="title">
+            <div id="title-container">
+                <div id="title-text"><div id="hi">Hi</div> <div id="muf">muffin!</div></div>
+
+                <div id="muffins">
                     <object data="/images/muffin.svg" width="300" height="300"> </object>
+                    <p id="res-hi">Hi!</p>
+                    <object id="mini-muf" data="/images/muffin.svg" width="50" height="50"> </object>
+
                 </div>
             </div>
 
         </section>
+        <section id="presentacion" class="impar">
+            <div class="content flex-desc">
+                <img alt="" src="/images/pantalla1.svg">
+                <div class="descripcion">
+                    <h2>Explora y disfruta nuestro repo de muffins</h2>
+                    <div>
+                        No seas tímido y adéntrate en nuestra aventura. Descubre todas las posibilidades que engloban las magdalenas: de vainilla, de chocolate, con birutas, con pepitas... ¡Todo es posible!
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="" class="par">
+            <div class="content flex-desc flex-reverse">
+                <img alt="" src="/images/pantalla2.svg">
+                <div class="descripcion">
+                    <h2>Comparte o modifica muffins a tu gusto</h2>
+                    <div>
+                        Puedes tanto crear una nueva tarjeta como modificar las magdalenas ya existentes a tu gusto. ¡Este es un espacio para todos!
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer id="final">
+            <h2>Final de la pagina</h2>
+
+        </footer>
+
         
         <!-- Incluimos los scripts necesarios -->
         <script src="/scripts/nav_bar.js"></script>

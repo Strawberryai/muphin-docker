@@ -1,7 +1,7 @@
 :root{
-    --bg-a: #F5F5F5;
-    --bg-b: #22262c;
-    --bg-c: #171a1e;
+    --bg-a: #22262c;
+    --bg-b: #f4f4f4;
+    --bg-c: #fff2d8;
 
     --bg-active: #FFAB00;
     --bg-barhover: #111;
@@ -9,18 +9,29 @@
     --text-a: #000;
     --text-b: #fff;
 
+    --border-a: #434b57;
+
     --red: #ff5555;
+
+    --a-link: #2edba5;
+
+    /*tiempos de animaciones*/
+    --title-hi: 0.5s;
+    --title-muf: 0.5s;
+    --res-hi: 1s;
+    --content: 0.5s;
 
     /*font-family: Arial;*/
     font-family: 'Inter', sans-serif;
 } 
 
 body{
-    background: var(--bg-a);
+    background: var(--bg-b);
     margin: 0;
 }
 
 a{
     text-decoration: none;
+    color: var(--a-link);
 }
 

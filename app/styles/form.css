@@ -1,5 +1,5 @@
 #zona-registro{
-    background: var(--bg-a);
+    background: var(--bg-b);
     width: 30%;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -7,7 +7,7 @@
     padding-right: 2rem;
     margin: auto;
     margin-top: 3rem;
-    box-shadow: 1px 1px 7px var(--bg-b);
+    box-shadow: 1px 1px 7px var(--border-a);
 }
 
 #form *{
@@ -33,7 +33,7 @@ input:focus{
     border-color: var(--bg-active);
     box-shadow:0 0 8px 0 var(--bg-active);
 }
-button[type=submit] {
+button{
     padding: 0.5rem 2rem;
     background: var(--bg-active);
     border: 0 none;

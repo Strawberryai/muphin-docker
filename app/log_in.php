@@ -49,21 +49,24 @@ if(isset($_SESSION['user'])){
         <?php require_once("components/nav_bar.php")?>
 
         <div id="zona-registro">
-            <form action="log_in.php" method="POST">
+            <form id="form" action="log_in.php" method="POST">
                 <div class="form-item">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" placeholder="Enter your username" value="">
+                    <span id=errorUsername style="color:red"></span>
                 </div>
                 <div class="form-item">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" value="">
+                    <span id=errorPassword style="color:red"></span>
                 </div>
                 <div class="form-item">
-                    <button type="submit" name="login" value="Submit">Log in</button>
+                    <button type="button" id="button" name="login" onclick="validar_y_enviar_datos()">Log in</button>
                 </div>
             </form>
         </div>
 
+        <script src="scripts/forms.js"></script>
     </body>
 </html>
 
