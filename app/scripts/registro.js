@@ -1,3 +1,4 @@
+
 let form = document.getElementById('form');
 
 let nombre= form.children.username;
@@ -25,6 +26,7 @@ function validar_y_enviar_datos(){
 
 
 form.addEventListener("submit",function(e){
+    e.preventDefault()
     error=0;
 
     if (nombre.value==""){//si nombre vacio nombre incorrecto
@@ -106,4 +108,3 @@ form.addEventListener("submit",function(e){
     }
 
 }) 
-

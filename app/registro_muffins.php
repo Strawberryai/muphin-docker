@@ -1,7 +1,7 @@
 <?php
     $titulo = isset($_POST["titulo"])? $_POST["titulo"]:"";
-    $imagen = isset($_POST["imagen"])? $_POST["imagen"]:"";
-    $desc= isset($_POST["desc"])? $_POST["desc"]:"";
+    $imagen = isset($_POST["tipo"])? $_POST["tipo"]:"";
+    $desc= isset($_POST["descripcion"])? $_POST["descripcion"]:"";
     $likes = isset($_POST["likes"])? $_POST["likes"]:"";
     $user_prop= isset($_POST["user_prop"])? $_POST["user_prop"]:"";
 

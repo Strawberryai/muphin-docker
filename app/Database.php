@@ -90,6 +90,30 @@ class Database{
         $res = $this->send_query_db($sql_ins);
     }
 
+    public function registrar_muffin($datos){
+        
+        $titulo = isset($_POST["titulo"])? $_POST["titulo"]:"";
+        $imagen = isset($_POST["tipo"])? $_POST["tipo"]:"";
+        $desc= isset($_POST["descripcion"])? $_POST["descripcion"]:"";
+        //$user_prop= isset($_POST["user_prop"])? $_POST["user_prop"]:"";
+
+    try{
+        $conexion =new mysqli("'localhost;port=8890:80;dbname=database','root',''");
+        $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+
+        echo json_encode("Conectado correctamente");
+
+        $sql_ins = "INSERT INTO muffins (titulo, imagen, desc, likes) VALUES ('{$datos['titulo']}', '{$datos['tipo']}', '{$datos['descripcion']}', 0 )";
+        $res = $this->send_query_db($sql_ins);
+
+    }catch(PDOException $error){    
+        echo $error->getMessage();
+        die();
+}
+
+    }
+
     public function obtener_datos_usuario($user){
         // PRE: El usuario está registrado y loggeado
         // POST: Sus datos personales exceptuando la contraseña actual
