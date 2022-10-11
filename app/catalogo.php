@@ -3,11 +3,10 @@ session_start();
 
 require('Database.php');
 $db = Database::getInstance();
-if(isset($_SESSION['user'])){
-    // Estamos loggeados -> volvemos a la página principal
-    if(isset($_POST['Añadir muffin'])){
+//if(isset($_SESSION['user'])){
+    if(isset($_POST['catalogo'])){
         //El usuario quiere registrar un muffin
-        unset($_POST['Añadir muffin']);
+        unset($_POST['catalogo']);
         $datos['titulo'] = $_POST['titulo'];
         $datos['tipo'] = $_POST['tipo'];
         $datos['descripcion'] = $_POST['descripcion'];
@@ -16,22 +15,25 @@ if(isset($_SESSION['user'])){
     
         
         $error = $db->registrar_muffin($datos);
-    }
-    if(!isset($error)){
-        // Si no hay error modificamos la sesión y volvemos a la página principal
-        session_destroy();
-        session_start();
-        header('Location:index.php');
-    }
+    
+        if(!isset($error)){
+            // Si no hay error modificamos la sesión y volvemos a la página principal
+            session_destroy();
+            session_start();
+            header('Location:index.php');
+        }
+        else{
+            header('Location:index.php');
+            echo $error;
+        }
     
         // Hacemos algo con el error
-        header('Location:index.php');
-    echo $error;
+    }    
 
-}
-else{
+//}
+//else{
    // header("Location:log_in.php");
-}
+//}
 
 ?>
 
