@@ -91,9 +91,25 @@ class Database{
     }
 
     public function registrar_muffin($datos){
-        $sql_ins = "INSERT INTO muffins (titulo, imagen, desc, likes) VALUES ('{$datos['titulo']}', '{$datos['tipo']}', '{$datos['descripcion']}', 0 )";
+        $sql_ins = "INSERT INTO muffins (titulo, imagen, descripcion, user_prop) VALUES ('{$datos['titulo']}', '{$datos['tipo']}', '{$datos['descripcion']}', '{$datos['user_prop']}')";
         $res = $this->send_query_db($sql_ins);
     }
+
+    public function obtener_muffins(){
+        $sql_ins="SELECT * FROM muffins";
+
+        $query = mysqli_query($this->conn, $sql_ins)
+            or die (mysqli_error($this->conn));
+        return $query;
+
+    }
+
+    public function incrementarLikes($i){
+        $sql_ins="UPDATE muffins set likes=likes+1 WHERE id=$i";
+        $res = $this->send_query_db($sql_ins);
+    }
+
+   
     
 
 

@@ -3,13 +3,14 @@ session_start();
 
 require('Database.php');
 $db = Database::getInstance();
-//if(isset($_SESSION['user'])){
-    if(isset($_POST['catalogo'])){
+if(isset($_SESSION['user'])){
+    if(isset($_POST['añadirmuffin'])){
         //El usuario quiere registrar un muffin
-        unset($_POST['catalogo']);
+        unset($_POST['añadirmuffin']);
         $datos['titulo'] = $_POST['titulo'];
         $datos['tipo'] = $_POST['tipo'];
         $datos['descripcion'] = $_POST['descripcion'];
+        $datos['user_prop']=$_SESSION['user'];
     
 
     
@@ -18,9 +19,7 @@ $db = Database::getInstance();
     
         if(!isset($error)){
             // Si no hay error modificamos la sesión y volvemos a la página principal
-            session_destroy();
-            session_start();
-            header('Location:index.php');
+            header('Location:catalogo.php');
         }
         else{
             header('Location:index.php');
@@ -28,12 +27,22 @@ $db = Database::getInstance();
         }
     
         // Hacemos algo con el error
-    }    
+    }
+   
+    $i=0;    
+    $directory = "images/TIPOS";                                       //location of directory with files
+    $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
+    $files = array_map("htmlspecialchars",$scanned_directory) ;
+    
+    $i=0;
+    $muffins=$db->obtener_muffins();
+    
+    
 
-//}
-//else{
-   // header("Location:log_in.php");
-//}
+}
+else{
+   header("Location:log_in.php");
+}
 
 ?>
 
@@ -70,39 +79,99 @@ $db = Database::getInstance();
         <h1>
         Catálogo de muffins
         <br>
+
+        
         <table >
             <tr>
                 <td>
                     Muffins
                 </td>
                 <td>
-                    Edición
+                    Titulo
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Propietario
+                </td>
+                <td>
+                    Likes
+                </td>
+
+                <td>
+                    Editar
                 </td>
             </tr>
 
             <tr>
+                <?php
+                function incrementarLikes($i){
+                    $db->incrementarLikes($i);
+                }
+                foreach($muffins as $muffin){
+                    echo'<tr>
+                        <td>
+                            <img src="/images/TIPOS/'. $muffin['imagen'] .'
+
+                            " width="300" height="300">
+                        </td>
+                        <td>
+                        '.$muffin['titulo'].'
+                        </td>
+
+                        <td>
+                        '.$muffin['descripcion'].'
+                        </td>
+
+                        <td>
+                        '.$muffin['user_prop'].'
+                        </td>
+
+                        <td>
+                        '.$muffin['likes'].'
+                        <br>
+                        <button type="button" id='.$muffin["id"].'  onclick="incrementarLikes('.$muffin["id"].')">¡Da like!</button>
+                        </td>
+                        <td>
+                        <button type="button" id='.$muffin["id"].'>Edita tu muffin</button>
+                        </td>
+                    </tr>';
+                }
+               
+                
+                ?>
+
                 <td>
-                    <!--<img src="src/download.jpeg">-->
+                   
                 </td>
                 <td>
-                    <button type="button">Edita tu muffin</button>
+                    
                 </td>
             </tr>
             
             
         </table>
 
+
+
+
         <div id="zona-añadir muffin">
             <form id="form" action="catalogo.php" method="POST">
                 <div class="form-item">
-                    <label for="titulo">Tipo:</label>
-                    <input type="text" id="titulo" name="titulo" placeholder="Introduzca el titulo de tu muffinn" value=<?php echo "{$datos['username']}"; ?>>
+                    <label for="titulo">Titulo:</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Introduzca el titulo de tu muffinn" >
+                    
                     <span id="errorTitulo" style="color:red"></span>
                 </div>
 
                 <div class="form-item">
                     <label for="tipo">Tipo:</label>
-                    <input type="text" id="tipo" name="tipo" placeholder="Introduzca el tipo de muffinn" value=<?php echo "{$datos['username']}"; ?>>
+                    <select id="tipo" name="tipo"><?
+                    foreach ($files as $file){
+                        echo "<option value='$file'>$file</option>";
+                    } 
+                    ?> </select>
                     <span id="errorTipo" style="color:red"></span>
                 </div>
 
@@ -114,7 +183,7 @@ $db = Database::getInstance();
 
 
                 <div class="form-item">
-                    <button type="button" id="button" name="Añadir muffin" value="Añadir muffin" onclick="validar_y_añadir_muffin()">Añadir muffin</button>
+                    <button type="button" id="button" name="añadirmuffin" value="Añadir muffin" onclick="validar_y_añadir_muffin()">Añadir muffin</button>
                 </div>
             </form>
 
