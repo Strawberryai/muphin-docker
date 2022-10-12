@@ -9,16 +9,25 @@ let pass    = document.getElementById('password')
 let pass2   = document.getElementById('password2') 
 let button  = document.getElementById('button') 
 
-// Tomamos los elementos de output para los errores
-let errUser     = document.getElementById('errorUsername') 
-let errNomApe   = document.getElementById('errorNombreApellido') 
-let errDni      = document.getElementById('errorDNI') 
-let errTelf     = document.getElementById('errorTelf') 
-let errEmail    = document.getElementById('errorMail') 
-let errPass     = document.getElementById('errorPassword') 
-let errPass2    = document.getElementById('errorPassword2') 
-
 function validar_y_enviar_datos(){
+    // Tomamos los elementos del formulario
+    let user    = document.getElementById('username') 
+    let nom_ape = document.getElementById('nombre_apellidos') 
+    let dni     = document.getElementById('DNI') 
+    let telf    = document.getElementById('telf') 
+    let email   = document.getElementById('email') 
+    let pass    = document.getElementById('password') 
+    let pass2   = document.getElementById('password2') 
+    let button  = document.getElementById('button') 
+
+    // Tomamos los elementos de output para los errores
+    let errUser     = document.getElementById('errorUsername') 
+    let errNomApe   = document.getElementById('errorNombreApellido') 
+    let errDni      = document.getElementById('errorDNI') 
+    let errTelf     = document.getElementById('errorTelf') 
+    let errEmail    = document.getElementById('errorMail') 
+    let errPass     = document.getElementById('errorPassword') 
+    let errPass2    = document.getElementById('errorPassword2') 
     let server = window.location.href;
     let error=0;
     let data = {};
@@ -180,6 +189,72 @@ function validar_y_enviar_datos(){
         send_POST_form(server, data);
     }
 }
+
+function validar_y_añadir_muffin(){
+    let server = window.location.href;
+    let error=0;
+    let datos = {};
+    let type;
+    let tipo=document.getElementById("tipo")
+    let descripcion=document.getElementById("descripcion")
+    let errorTipo=document.getElementById("errorTipo")
+    let errorDescripcion=document.getElementById("errorDescripcion")
+    let button  = document.getElementById("button")
+    let errorTitulo=document.getElementById("errorTitulo")
+    let titulo=document.getElementById("titulo")
+    
+    if(button){
+        type = button.name;
+    }else{
+        console.error("ERROR: el formulario no tiene un tipo")
+        return
+    }
+
+    datos[type] = true
+    if(tipo){
+        if (tipo.value==""){
+            error=error+1
+            errorTipo.innerHTML="No has añadido tipo"  
+        }
+        else{
+            datos["tipo"]= tipo.value
+            errorTipo.innerHTML=""
+        }
+    }
+
+    if(titulo){
+        if (titulo.value==""){
+            error=error+1
+            errorTitulo.innerHTML="No has añadido titulo"  
+        }
+        else{
+            datos["titulo"]= titulo.value
+            errorTitulo.innerHTML=""
+        }
+    }
+  
+
+    if(descripcion){
+        if (descripcion.value==""){
+            error=error+1
+            errorDescripcion.innerHTML="No has añadido Descripcion"
+        }
+        else{
+            errorDescripcion.innerHTML=""
+            datos["descripcion"]= descripcion.value
+        }
+
+    }
+   
+
+    console.log(datos)
+    
+    if(error==0){
+        //si no hay errores
+        send_POST_form(server, datos);
+    }
+}
+
 
 function send_POST_form(path, params, method='post') {
 

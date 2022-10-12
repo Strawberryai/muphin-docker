@@ -27,7 +27,7 @@
 
 <nav id="top_bar">
     <li class="bar_elm <?php echo $is_active['inicio']; ?>"><a href="/">Inicio</a></li>
-    <li class="bar_elm <?php echo $is_active['catalogo']; ?>"><a href="#">Catálogo</a></li>
+    <li class="bar_elm <?php echo $is_active['catalogo']; ?>"><a href="/catalogo.php">Catálogo</a></li>
     <li class="bar_elm <?php echo $is_active['about']; ?>"><a href="/about.php">Sobre nosotros</a></li>
 
     <!-- Comprobamos si la sesión se ha iniciado -->
