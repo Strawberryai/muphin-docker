@@ -1,16 +1,21 @@
 <?php
 session_start();
-
 require('Database.php');
 $db = Database::getInstance();
-if(isset($_SESSION['user'])){
+
     if(isset($_POST['añadirmuffin'])){
         //El usuario quiere registrar un muffin
         unset($_POST['añadirmuffin']);
         $datos['titulo'] = $_POST['titulo'];
         $datos['tipo'] = $_POST['tipo'];
         $datos['descripcion'] = $_POST['descripcion'];
-        $datos['user_prop']=$_SESSION['user'];
+        if(isset($_SESSION['user'])){
+            $datos['user_prop']=$_SESSION['user'];
+        }
+        else{
+            $datos['user_prop']='Anonimo';
+        }
+        
     
 
     
@@ -39,10 +44,7 @@ if(isset($_SESSION['user'])){
     
     
 
-}
-else{
-   header("Location:log_in.php");
-}
+
 
 ?>
 
@@ -142,12 +144,7 @@ else{
                 
                 ?>
 
-                <td>
-                   
-                </td>
-                <td>
-                    
-                </td>
+                
             </tr>
             
             
@@ -193,8 +190,9 @@ else{
           
 
     </h1>
-    <script defer src="scripts/añadirMuffin.js"></script>
-    <script defer src="scripts/forms.js"></script>
+    <script  src="scripts/añadirMuffin.js"></script>
+    <script  src="scripts/nav_bar.js"></script>
+    <script  src="scripts/forms.js"></script>
         
     </body>
     

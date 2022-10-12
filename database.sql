@@ -39,12 +39,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `muffins` (
-  `id` int IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  `imagen`text 
+  `id` int NOT NULL AUTO_INCREMENT,
+  `imagen` text NOT NULL,
   `titulo` text NOT NULL,
-  `desc` text NOT NULL,
-  `likes`int SET DEFAULT=0,
-  `user_prop`text NOT NULL
+  `descripcion` text NOT NULL,
+  `likes` int DEFAULT 0,
+  `user_prop` DEFAULT `Anonimo`,
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -66,9 +67,7 @@ INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf
 --
 -- Indices de la tabla `usuarios`
 --
-ALTER TABLE `muffins`
-  ADD PRIMARY KEY (`id`);
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
