@@ -75,6 +75,10 @@ class Database{
             return "ERROR: el teléfono introducido no tiene el formato correcto";
         }
 
+        if(!Validador::val_date($datos['date'])){
+            return "ERROR: el teléfono introducido no tiene el formato correcto";
+        }
+
         // Comprobar que el nombre de usuario es único
         if(strcmp($datos['username'], "") != 0){
             // El username no es un string vacío
@@ -86,7 +90,7 @@ class Database{
 
         }
 
-        $sql_ins = "INSERT INTO usuarios (username, password, nombre_apellidos, DNI, telf, email) VALUES ('{$datos['username']}', '{$datos['password']}', '{$datos['nombre_apellidos']}', '{$datos['DNI']}', '{$datos['telf']}', '{$datos['email']}')";
+        $sql_ins = "INSERT INTO usuarios (username, password, nombre_apellidos, DNI, telf, email, fecha) VALUES ('{$datos['username']}', '{$datos['password']}', '{$datos['nombre_apellidos']}', '{$datos['DNI']}', '{$datos['telf']}', '{$datos['email']}', '{$datos['date']}')";
         $res = $this->send_query_db($sql_ins);
     }
 
@@ -94,7 +98,7 @@ class Database{
         // PRE: El usuario está registrado y loggeado
         // POST: Sus datos personales exceptuando la contraseña actual
         
-        $datos = $this->send_query_db("SELECT username, nombre_apellidos, DNI, telf, email from usuarios WHERE username='{$user}'");
+        $datos = $this->send_query_db("SELECT username, nombre_apellidos, DNI, telf, email, fecha from usuarios WHERE username='{$user}'");
         return $datos;
     }
 
@@ -134,6 +138,10 @@ class Database{
             return "ERROR: el teléfono introducido no tiene el formato correcto";
         }
 
+        if(!Validador::val_date($datos['date'])){
+            return "ERROR: el teléfono introducido no tiene el formato correcto";
+        }
+
         // Comprobar que el nombre de usuario es único
         if(strcmp($datos['username'], "") != 0){
             // El username no es un string vacío
@@ -145,7 +153,7 @@ class Database{
 
         }
 
-        $sql_params = "username='{$datos['username']}', DNI='{$datos['DNI']}', telf='{$datos['telf']}', email='{$datos['email']}'";
+        $sql_params = "username='{$datos['username']}', DNI='{$datos['DNI']}', telf='{$datos['telf']}', email='{$datos['email']}', fecha='{$datos['date']}'";
 
         // Si no hemos introducido una contraseña valida, mantenemos la
         // anterior

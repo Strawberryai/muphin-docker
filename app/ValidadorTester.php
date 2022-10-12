@@ -5,9 +5,10 @@ class ValidadorTester{
     // Casos de prueba para el validador
 
     public function __construct(){
-        $this->val_DNI();
-        $this->val_telf();
-        $this->val_email();
+        // $this->val_DNI();
+        // $this->val_telf();
+        // $this->val_email();
+        $this->val_date();
     }
 
     private function val_DNI(){
@@ -56,6 +57,26 @@ class ValidadorTester{
 
         $res = Validador::val_email("1.com") ? "TRUE" : "FALSE"; 
         echo "val_email-5: Expected FALSE; Recibed: " . $res . "\n";
+    }
+
+    private function val_date(){
+        $res = Validador::val_date("2022-10-10") ? "TRUE" : "FALSE"; 
+        echo "val_date-1: Expected TRUE; Recibed: " . $res . "</br>";
+
+        $res = Validador::val_date("2022/10/10") ? "TRUE" : "FALSE"; 
+        echo "val_date-2: Expected FALSE; Recibed: " . $res . "</br>";
+
+        $res = Validador::val_date("1") ? "TRUE" : "FALSE"; 
+        echo "val_date-3: Expected FALSE; Recibed: " . $res . "</br>";
+
+        $res = Validador::val_date("@examil.com") ? "TRUE" : "FALSE"; 
+        echo "val_date-4: Expected FALSE; Recibed: " . $res . "</br>";
+
+        $res = Validador::val_date("") ? "TRUE" : "FALSE"; 
+        echo "val_date-5: Expected FALSE; Recibed: " . $res . "</br>";
+
+        $res = Validador::val_date("2022/10/10") ? "TRUE" : "FALSE"; 
+        echo "val_date-6: Expected FALSE; Recibed: " . $res . "</br>";
     }
 
 }

@@ -4,6 +4,7 @@ let nom_ape = document.getElementById('nombre_apellidos')
 let dni     = document.getElementById('DNI') 
 let telf    = document.getElementById('telf') 
 let email   = document.getElementById('email') 
+let date  = document.getElementById('date') 
 let pass    = document.getElementById('password') 
 let pass2   = document.getElementById('password2') 
 let button  = document.getElementById('button') 
@@ -22,6 +23,7 @@ function validar_y_enviar_datos(){
     let error=0;
     let data = {};
     let type;
+
 
     // Comprobamos el tipo de formulario (log in, register...)
     if(button){
@@ -68,7 +70,7 @@ function validar_y_enviar_datos(){
 
 
     if(pass && pass2){
-        if(pass.value!=pass2.value){
+        if(pass.value!=pass2.value || pass.value==""){
             //si las contraseñas no coinciden
             if(errPass && errPass2){
                 errorPassword.innerHTML="Las contraseñas no coinciden"
@@ -157,7 +159,21 @@ function validar_y_enviar_datos(){
         }
     }
 
-    console.log(data)
+    if(date){
+        if(date.value != ""){
+            let formattedDate = yyyymmdd(new Date(date.value));
+            data["date"] = formattedDate;
+
+        }else{
+            if(errDate){
+                errDate.innerHTML="Introduce una fecha"
+                errDate.style.color="red"//mensaje de error en rojo
+            }
+
+        }
+    }
+
+    // console.log(data)
 
     if(error==0){
         //si no hay errores
@@ -186,4 +202,11 @@ function send_POST_form(path, params, method='post') {
 
   document.body.appendChild(form);
   form.submit();
+}
+
+function yyyymmdd(dateIn) {
+    let yyyy = dateIn.getFullYear();
+    let mm = dateIn.getMonth() + 1; // getMonth() is zero-based
+    let dd = dateIn.getDate();
+    return yyyy + "-" + mm + "-" + dd
 }

@@ -35,6 +35,7 @@ CREATE TABLE `usuarios` (
   `DNI` text NOT NULL,
   `telf` int(9) NOT NULL,
   `email` text NOT NULL,
+  `fecha` text NOT NULL,
   PRIMARY KEY(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -43,11 +44,11 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`) VALUES
-('Mikel001', 'test', 'Mikel García', '11111111-Z', '111111111', 'mikel001@mail.com'),
-('Mikel002', 'test', 'Mikel García2', '22222222-Z', '222222222', 'mikel002@mail.com'),
-('Mikel003', 'test', 'Mikel García3', '33333333-Z', '333333333', 'mikel003@mail.com'),
-('Aitor001', 'test', 'Aitor Viñedo', '11111111-Z', '111111111', 'aitor001@mail.com');
+INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`, `fecha`) VALUES
+('Mikel001', 'test', 'Mikel García', '11111111Z', '111111111', 'mikel001@mail.com', '2022-10-06'),
+('Mikel002', 'test', 'Mikel García2', '22222222Z', '222222222', 'mikel002@mail.com', '2022-10-07'),
+('Mikel003', 'test', 'Mikel García3', '33333333Z', '333333333', 'mikel003@mail.com', '2022-10-08'),
+('Aitor001', 'test', 'Aitor Viñedo', '11111111Z', '111111111', 'aitor001@mail.com', '2022-10-09');
 
 --
 -- Índices para tablas volcadas

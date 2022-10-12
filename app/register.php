@@ -18,6 +18,7 @@ if(isset($_SESSION['user'])){
         $datos['DNI'] = $_POST['DNI'];
         $datos['telf'] = $_POST['telf'];
         $datos['email'] = $_POST['email'];
+        $datos['date'] = $_POST['date'];
 
         $error = $db->registrar_usuario($datos);
 
@@ -87,6 +88,12 @@ if(isset($_SESSION['user'])){
                 <div class="form-item">
                     <label for="email">email:</label>
                     <input type="mail" id="email" name="email" placeholder="Enter your email" value="">
+                    <span id=errorMail style="color:red"></span>
+                </div>
+
+                <div class="form-item">
+                    <label for="date">Fecha nacimiento:</label>
+                    <input type="date" id="date" name="date" placeholder="Enter your birth date" value="">
                     <span id=errorMail style="color:red"></span>
                 </div>
 

@@ -57,6 +57,15 @@ class Validador{
         return filter_var($email, FILTER_VALIDATE_EMAIL); 
 
     }
+
+    public static function val_date($date){
+        if (DateTime::createFromFormat('Y-m-d', $date) !== false) {
+          // it's a date
+            return true;
+        }
+
+        return false;
+    }
 }
 
 ?>

@@ -63,6 +63,7 @@ if(!isset($_SESSION['user'])){
     $datos['DNI'] = $_POST['DNI'];
     $datos['telf'] = $_POST['telf'];
     $datos['email'] = $_POST['email'];
+    $datos['date'] = $_POST['date'];
 
     // Guardamos los datos para recuperarlos en la línea 17
     $_SESSION['datos'] = $datos;
@@ -125,6 +126,8 @@ if(!isset($_SESSION['user'])){
 
     // Obtenemos los datos del usuario loggeado
     $datos = $db->obtener_datos_usuario($_SESSION['user']);
+    $datos['date'] = $datos['fecha'];
+    unset($datos['fecha']);
 
     // Enviamos el formulario con los datos a modificar
     $form = "
@@ -155,6 +158,11 @@ if(!isset($_SESSION['user'])){
         </div>
 
         <div class='form-item'>
+            <label for='date'>Fecha nacimiento:</label>
+            <input type='date' id='date' name='date'>
+        </div>
+
+        <div class='form-item'>
             <label for='password'>New password:</label>
             <input type='password' id='password' name='password' value=''>
         </div>
@@ -169,6 +177,10 @@ if(!isset($_SESSION['user'])){
             <button type='submit' id='eliminar' name='eliminar'>Eliminar usuario</button>
         </div>
     </form>
+
+    <script>
+        window.onload = () => document.getElementById('date').value = '{$datos['date']}';
+    </script>
     ";
 ?>
 
