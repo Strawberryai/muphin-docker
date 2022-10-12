@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
-
 CREATE TABLE `usuarios` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL,
@@ -39,16 +38,26 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY(`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `muffins` (
+  `id` int IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  `imagen`text 
+  `titulo` text NOT NULL,
+  `desc` text NOT NULL,
+  `likes`int SET DEFAULT=0,
+  `user_prop`text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
-
 INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`, `fecha`) VALUES
 ('Mikel001', 'test', 'Mikel García', '11111111Z', '111111111', 'mikel001@mail.com', '2022-10-06'),
 ('Mikel002', 'test', 'Mikel García2', '22222222Z', '222222222', 'mikel002@mail.com', '2022-10-07'),
 ('Mikel003', 'test', 'Mikel García3', '33333333Z', '333333333', 'mikel003@mail.com', '2022-10-08'),
 ('Aitor001', 'test', 'Aitor Viñedo', '11111111Z', '111111111', 'aitor001@mail.com', '2022-10-09');
+
+
 
 --
 -- Índices para tablas volcadas
@@ -57,9 +66,9 @@ INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf
 --
 -- Indices de la tabla `usuarios`
 --
--- ALTER TABLE `usuarios`
---   ADD PRIMARY KEY (`user_id`);
--- COMMIT;
+ALTER TABLE `muffins`
+  ADD PRIMARY KEY (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
