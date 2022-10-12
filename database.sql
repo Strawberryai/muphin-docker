@@ -44,7 +44,7 @@ CREATE TABLE `muffins` (
   `titulo` text NOT NULL,
   `descripcion` text NOT NULL,
   `likes` int DEFAULT 0,
-  `user_prop` DEFAULT `Anonimo`,
+  `user_prop` text DEFAULT "Anonimo",
   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
