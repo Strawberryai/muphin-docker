@@ -49,20 +49,16 @@ if(isset($_POST['confirmar-añadirmuffin'])){
                     
                     <span id='errorTitulo' style='color:red'></span>
                 </div>
-
                 <div class='form-item'>
                     <label for='tipo'>Tipo:</label>
                     <select id='tipo' name='tipo'>{$options}</select>
                     <span id='errorTipo' style='color:red'></span>
                 </div>
-
                 <div class='form-item'>
                     <label for='descripcion'>Descripción:</label>
                     <input type='text' id='descripcion' name='descripcion' placeholder='Introduzca la descripción' value=''>
                     <span id='errorDescripcion' style='color:red'></span>
                 </div>
-
-
                 <div class='form-item'>
                     <button type='button' id='button' name='confirmar-añadirmuffin' value='Añadir muffin' onclick='validar_y_añadir_muffin()'>Añadir muffin</button>
                 </div>
@@ -70,7 +66,17 @@ if(isset($_POST['confirmar-añadirmuffin'])){
         </div>
 ";
 
-}else{
+}
+elseif(isset($_POST['botonLikes'])){
+    require('components/muffin_card.php');
+    unset($_POST['botonLikes']);
+    header("Location:catalogo.php");
+    $datos=$_POST['id'];
+    $db->incrementarLikes($datos);
+    $content = get_muffin_screen();
+}
+
+else{
     // Pagina principal donde se listan los muffins
     require('components/muffin_card.php');
     $content = get_muffin_screen();

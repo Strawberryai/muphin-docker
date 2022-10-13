@@ -108,8 +108,8 @@ class Database{
 
     }
 
-    public function incrementarLikes($i){
-        $sql_ins="UPDATE muffins set likes=likes+1 WHERE id=$i";
+    public function incrementarLikes($datos){
+        $sql_ins= "UPDATE muffins SET likes=likes+1 WHERE id='{$datos["id"]}'";
         $res = $this->send_query_db($sql_ins);
     }
 

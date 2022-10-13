@@ -259,9 +259,22 @@ function validar_y_añadir_muffin(){
 
 // functión llamada en muffin_card.php al hacer click sobre el boton de like
 function incrementarLikes(muffin){
+    let datos={};
+    let type;
+    let button  = document.getElementById(muffin+ "_button")
     let heart = document.getElementById(muffin + "_button");
     heart.classList.add("muffin_heart_focused");
-
+    let server = window.location.href;
+    if(button){
+        type = button.name;
+    }else{
+        console.error("ERROR: el formulario no tiene un tipo")
+        return
+    }
+    datos["botonLikes"] = true
+    datos["id"]=muffin;
+    console.log(datos)
+    send_POST_form(server, datos);
 }
 
 function send_POST_form(path, params, method='post') {
