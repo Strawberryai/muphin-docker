@@ -16,9 +16,11 @@ function get_muffin_screen(){
         $muffin_card= "
             <div class='muffin_card'>
                 <div class='muffin_author_section'>
+                    <form id='form' action='catalogo.php' method='POST'>
                     <span class='muffin_autor'>{$muffin['user_prop']}</span>
                     <i class='fa-solid fa-gear muffin_settings' onclick='abrirOpciones(". '"' . $muffin['id'] . '"' . ")'></i>
-                </div>
+                    </form>
+                    </div>
                 <div class='muffin_img'>
                     <img src='./images/TIPOS/{$muffin['imagen']}' width='250px' height='250px'>
                 </div>

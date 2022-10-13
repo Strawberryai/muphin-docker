@@ -75,6 +75,84 @@ elseif(isset($_POST['botonLikes'])){
     $db->incrementarLikes($datos);
     $content = get_muffin_screen();
 }
+elseif(isset($_POST['modificarMuf'])){
+    require('components/muffin_card.php');
+    unset($_POST['modificarMuf']);
+    unset($datos);
+    $datos['id']= $_POST['id'];
+    $datos['titulo'] = $_POST['titulo'];
+    $datos['imagen'] = $_POST['imagen'];
+    $datos['likes'] = $_POST['likes'];
+    $datos['descripcion'] = $_POST['descripcion'];
+    echo $datos;
+    $db->modificar_datos_muffin($datos);
+    $content = get_muffin_screen();
+    
+    
+}
+
+elseif(isset($_POST['eliminar'])){
+    require('components/muffin_card.php');
+    unset($_POST['modificarMuf']);
+    unset($datos);
+    $datos=$_POST['id'];
+    $error = $db->eliminar_muffin($datos);
+    $content = get_muffin_screen();
+    
+    
+}
+elseif(isset($_POST['botonEdit'])){
+    require('components/muffin_card.php');
+    unset($_POST['botonEdit']);
+    $id=$_POST['id'];
+    $datos=$db->obtener_datos_muffin($id);
+    $content = get_muffin_screen();
+    $directory = "images/TIPOS";                                       //location of directory with files
+    $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
+    $files = array_map("htmlspecialchars",$scanned_directory);
+
+    $options = "";
+    foreach ($files as $file){
+        $options = $options . "<option value='{$file}'>{$file}</option>";
+    } 
+    $content = "
+    <form action='catalogo.php' method='POST'>
+        <div class='form-item'>
+            <label for='Descripcion'>Descripcion:</label>
+            <input type='text' id='descripcion' name='descripcion' value='{$datos['descripcion']}'>
+        </div>
+
+        <div class='form-item'>
+            <label for='Titulo'>Titulo:</label>
+            <input type='text' id='titulo' name='titulo' value='{$datos['titulo']}'>
+        </div>
+            <div class='form-item'>
+            <label for='Likes'>Likes:</label>
+            <input type='number' id='likes' name='likes' value='{$datos['likes']}'>
+        </div>
+
+        <div class='form-item'>
+            <label for='tipo'>Tipo:</label>
+            <select id='imagen' >{$options}</select>
+        </div>
+
+        <div class='form-item'>
+            <label for='tipo'>Id de tu muffin:</label>
+            <input id='id' type='text' value='{$datos['id']}'  readonly>
+        </div>
+
+        <div class='form-item'>
+            <button type='submit' name='modificarMuf' value='submit'>Modificar datos</button>
+            <button type='submit' id='eliminar' name='eliminar' value='submit'>Eliminar muffin</button>
+        </div>
+
+
+    </form>
+
+    ";
+    
+}
+
 
 else{
     // Pagina principal donde se listan los muffins
