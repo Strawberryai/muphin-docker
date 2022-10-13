@@ -190,6 +190,8 @@ function validar_y_enviar_datos(){
     }
 }
 
+// function llamada al hacer click sobre el boton añadir muffin de
+// muffin_card.php 
 function validar_y_añadir_muffin(){
     let server = window.location.href;
     let error=0;
@@ -255,6 +257,12 @@ function validar_y_añadir_muffin(){
     }
 }
 
+// functión llamada en muffin_card.php al hacer click sobre el boton de like
+function incrementarLikes(muffin){
+    let heart = document.getElementById(muffin + "_button");
+    heart.classList.add("muffin_heart_focused");
+
+}
 
 function send_POST_form(path, params, method='post') {
 

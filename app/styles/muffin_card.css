@@ -1,0 +1,61 @@
+.muffin_section{
+    background: var(--bg-muffin-section);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: min-content;
+    padding: 2rem;
+}
+
+.muffin_card{
+    background: var(--bg-muffin-card);
+    color: var(--text-muffin-card);
+    width: min-content;
+    height: min-content;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.muffin_author_section{
+    border-bottom: 1px solid var(--border-muffin-img);
+    padding: 1rem;
+}
+
+.muffin_settings{
+    float: right;
+}
+
+.muffin_img{
+    border-bottom: 1px solid var(--border-muffin-img);
+}
+
+.muffin_end_section{
+    padding: 1rem;
+}
+
+.muffin_title{
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.muffin_heart{
+    transition: color 0.1s ease-in;
+}
+
+.muffin_heart_focused{
+    color: var(--heart-focused);
+    animation: heart_anim 0.5s;
+}
+
+@keyframes heart_anim{
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}

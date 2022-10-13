@@ -4,52 +4,6 @@ require('Database.php');
 $db = Database::getInstance();
 $content = "";
 
-function get_muffin_screen(){
-    $muffins=$db->obtener_muffins();
-
-    $content = "
-        <form action='catalogo.php' method='POST'>
-            <button type='submit' name='añadirmuffin' value='añadir muffin'>
-        </form>
-    ";
-
-    $list = "";
-
-    foreach($muffins as $muffin){
-        $list= "
-            <tr>
-                <td>
-                    <img src='/images/TIPOS/{$muffin['imagen']}' width='300' height='300'>
-                </td>
-                <td>
-                {$muffin['titulo']}
-                </td>
-
-                <td>
-                {$muffin['descripcion']}
-                </td>
-
-                <td>
-                {$muffin['user_prop']}
-                </td>
-
-                <td>
-                {$muffin['likes']}
-                <br>
-                <button type='button' id='{$muffin['id']}' onclick='incrementarLikes('{$muffin['id']}')'>¡Da like!</button>
-                </td>
-                <td>
-                <button type='button' id='{$muffin['id']}'>Edita tu muffin</button>
-                </td>
-            </tr>'
-        ";
-
-        $list = $list . $muffin_card;
-    }
-    
-    return $list;
-}
-
 if(isset($_POST['confirmar-añadirmuffin'])){
     //El usuario quiere registrar un muffin
     unset($_POST['añadirmuffin']);
@@ -118,6 +72,7 @@ if(isset($_POST['confirmar-añadirmuffin'])){
 
 }else{
     // Pagina principal donde se listan los muffins
+    require('components/muffin_card.php');
     $content = get_muffin_screen();
 }
 
@@ -141,6 +96,7 @@ if(isset($_POST['confirmar-añadirmuffin'])){
         <link rel="stylesheet" href="/styles/common.css?version=0.1">
         <link rel="stylesheet" href="/styles/nav_bar.css?version=0.1">
         <link rel="stylesheet" href="/styles/form.css?version=0.1">
+        <link rel="stylesheet" href="/styles/muffin_card.css?version=0.1">
 
         <!-- Incluimos unas fuentes online -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -158,9 +114,10 @@ if(isset($_POST['confirmar-añadirmuffin'])){
 
         <?php echo $content; ?>
 
-        <script src="scripts/añadirMuffin.js"></script>
+        <!-- Scripts de la página -->
         <script src="scripts/nav_bar.js"></script>
         <script src="scripts/forms.js"></script>
+        <script src="https://kit.fontawesome.com/32457df416.js" crossorigin="anonymous"></script>
         
     </body>
     
