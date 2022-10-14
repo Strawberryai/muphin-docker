@@ -113,7 +113,23 @@ class Database{
         $res = $this->send_query_db($sql_ins);
     }
 
-   
+    public function obtener_datos_muffin($datos){
+        $sql_ins= "SELECT * FROM muffins WHERE id=$datos";
+        $res = $this->send_query_db($sql_ins);
+        return $res;
+    }
+
+   public function modificar_datos_muffin($datos){
+        $sql_params="likes='{$datos['likes']}',imagen='{$datos['imagen']}',titulo='{$datos['titulo']}',descripcion='{$datos['descripcion']}',user_prop='{$datos['user_prop']}'";
+        $sql_ins= "UPDATE muffins SET {$sql_params} WHERE id='{$datos['id']}'";
+        echo $sql_ins;
+        $res = $this->send_query_db($sql_ins);
+   }
+
+   public function eliminar_muffin($id){
+        $sql_ins= "DELETE FROM muffins WHERE id=$id";
+        $res = $this->send_query_db($sql_ins);
+   }
     
 
 

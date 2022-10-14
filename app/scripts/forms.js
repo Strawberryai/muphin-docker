@@ -277,6 +277,23 @@ function incrementarLikes(muffin){
     send_POST_form(server, datos);
 }
 
+function abrirOpciones(muffin){
+    let datos={};
+    let type;
+    let button  = document.getElementById(muffin+ "_button")
+    let server = window.location.href;
+    if(button){
+        type = button.name;
+    }else{
+        console.error("ERROR: el formulario no tiene un tipo")
+        return
+    }
+    datos["botonEdit"] = true
+    datos["id"]=muffin;
+    console.log(datos)
+    send_POST_form(server, datos);
+}
+
 function send_POST_form(path, params, method='post') {
 
   // The rest of this code assumes you are not using a library.
