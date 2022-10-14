@@ -84,7 +84,7 @@ elseif(isset($_POST['modificarMuf'])){
     $datos['imagen'] = $_POST['imagen'];
     $datos['likes'] = $_POST['likes'];
     $datos['descripcion'] = $_POST['descripcion'];
-    echo $datos;
+    echo $datos['imagen'];
     $db->modificar_datos_muffin($datos);
     $content = get_muffin_screen();
     
@@ -93,19 +93,24 @@ elseif(isset($_POST['modificarMuf'])){
 
 elseif(isset($_POST['eliminar'])){
     require('components/muffin_card.php');
-    unset($_POST['modificarMuf']);
-    unset($datos);
+    unset($_POST['eliminar']);
     $datos=$_POST['id'];
+    echo "id:";
+    echo $datos;
     $error = $db->eliminar_muffin($datos);
+    echo $datos;
+    echo $error;
     $content = get_muffin_screen();
+
     
     
 }
 elseif(isset($_POST['botonEdit'])){
     require('components/muffin_card.php');
     unset($_POST['botonEdit']);
-    $id=$_POST['id'];
-    $datos=$db->obtener_datos_muffin($id);
+    $datos=$_POST['id'];
+    echo $datos;
+    $datos=$db->obtener_datos_muffin($datos);
     $content = get_muffin_screen();
     $directory = "images/TIPOS";                                       //location of directory with files
     $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
@@ -123,7 +128,7 @@ elseif(isset($_POST['botonEdit'])){
         </div>
 
         <div class='form-item'>
-            <label for='Titulo'>Titulo:</label>
+            <label for='titulo'>Titulo:</label>
             <input type='text' id='titulo' name='titulo' value='{$datos['titulo']}'>
         </div>
             <div class='form-item'>
@@ -132,18 +137,18 @@ elseif(isset($_POST['botonEdit'])){
         </div>
 
         <div class='form-item'>
-            <label for='tipo'>Tipo:</label>
+            <label for='imagen'>Tipo:</label>
             <select id='imagen' >{$options}</select>
         </div>
 
         <div class='form-item'>
-            <label for='tipo'>Id de tu muffin:</label>
-            <input id='id' type='text' value='{$datos['id']}'  readonly>
+            <label for='id'>Id de tu muffin:</label>
+            <input id='id' type='text' value='{$datos['id']}'>
         </div>
 
         <div class='form-item'>
-            <button type='submit' name='modificarMuf' value='submit'>Modificar datos</button>
-            <button type='submit' id='eliminar' name='eliminar' value='submit'>Eliminar muffin</button>
+            <button type='submit' name='modificarMuf' value='Submit'>Modificar datos</button>
+            <button type='submit' id='eliminar' name='eliminar' value='Submit'>Eliminar muffin</button>
         </div>
 
 
