@@ -122,7 +122,6 @@ class Database{
    public function modificar_datos_muffin($datos){
         $sql_params="likes='{$datos['likes']}',imagen='{$datos['imagen']}',titulo='{$datos['titulo']}',descripcion='{$datos['descripcion']}',user_prop='{$datos['user_prop']}'";
         $sql_ins= "UPDATE muffins SET {$sql_params} WHERE id='{$datos['id']}'";
-        echo $sql_ins;
         $res = $this->send_query_db($sql_ins);
    }
 
