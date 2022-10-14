@@ -84,7 +84,7 @@ elseif(isset($_POST['modificarMuf'])){
     $datos['imagen'] = $_POST['imagen'];
     $datos['likes'] = $_POST['likes'];
     $datos['descripcion'] = $_POST['descripcion'];
-    echo $datos['imagen'];
+    $datos['user_prop'] = $_POST['user_prop'];
     $db->modificar_datos_muffin($datos);
     $content = get_muffin_screen();
     
@@ -92,14 +92,33 @@ elseif(isset($_POST['modificarMuf'])){
 }
 
 elseif(isset($_POST['eliminar'])){
-    require('components/muffin_card.php');
     unset($_POST['eliminar']);
-    $datos=$_POST['id'];
-    echo "id:";
-    echo $datos;
+    $datos['id']= $_POST['id'];
+    $datos['titulo'] = $_POST['titulo'];
+    $content = "
+    <form action='catalogo.php' method='POST'>
+    <div class='form-item'>
+        <label for='id'></label>
+        <input type='hidden' id='id' name='id' value='{$datos['id']}' readonly>
+        <label for='id'>Nombre del muffin a eliminar:</label>
+        <input type='text' id='nombre' name='nombre' value='{$datos['titulo']}' readonly>
+    
+        </div>
+        <div class='form-item'>
+            <button type='submit' id='eliminar' name='eliminar-confirmado' value='Submit'  >Confirmar eliminación</button> 
+        </div>
+    </form>
+    ";
+
+    
+    
+}
+
+elseif(isset($_POST['eliminar-confirmado'])){
+    require('components/muffin_card.php');
+    unset($_POST['eliminar-confirmado']);
+    $datos=$_POST['id']; 
     $error = $db->eliminar_muffin($datos);
-    echo $datos;
-    echo $error;
     $content = get_muffin_screen();
 
     
@@ -109,7 +128,6 @@ elseif(isset($_POST['botonEdit'])){
     require('components/muffin_card.php');
     unset($_POST['botonEdit']);
     $datos=$_POST['id'];
-    echo $datos;
     $datos=$db->obtener_datos_muffin($datos);
     $content = get_muffin_screen();
     $directory = "images/TIPOS";                                       //location of directory with files
@@ -131,19 +149,26 @@ elseif(isset($_POST['botonEdit'])){
             <label for='titulo'>Titulo:</label>
             <input type='text' id='titulo' name='titulo' value='{$datos['titulo']}'>
         </div>
-            <div class='form-item'>
+
+        <div class='form-item'>
+            <label for='user_prop'>Usuario:</label>
+            <input type='text' id='user_prop' name='user_prop' value='{$datos['user_prop']}'>
+        </div>
+
+
+        <div class='form-item'>
             <label for='Likes'>Likes:</label>
             <input type='number' id='likes' name='likes' value='{$datos['likes']}'>
         </div>
 
         <div class='form-item'>
             <label for='imagen'>Tipo:</label>
-            <select id='imagen' >{$options}</select>
+            <select id='imagen' name='imagen' >{$options}</select>
         </div>
 
         <div class='form-item'>
             <label for='id'>Id de tu muffin:</label>
-            <input id='id' type='text' value='{$datos['id']}'>
+            <input id='id' name='id' type='text' value='{$datos['id']}'>
         </div>
 
         <div class='form-item'>
