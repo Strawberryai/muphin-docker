@@ -88,7 +88,7 @@ elseif(isset($_POST['modificarMuf'])){
     $datos['user_prop'] = $_POST['user_prop'];
     $db->modificar_datos_muffin($datos);
     $content = get_muffin_screen();
-    
+    header("Location:catalogo.php");
     
 }
 
