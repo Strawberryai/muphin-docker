@@ -82,8 +82,3 @@
     flex-direction: row-reverse;
 }
 
-#final{
-    background: var(--bg-a);
-    padding:4rem;
-    color: var(--text-b)
-}

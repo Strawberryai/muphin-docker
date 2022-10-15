@@ -1,0 +1,47 @@
+#final{
+    background: var(--bg-a);
+    padding:4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 4rem;
+    padding-top: 2rem;
+    color: var(--text-b)
+}
+
+.ft_left{
+    display: inline-block;
+}
+
+.ft_desc{
+    width: 100%;
+
+}
+
+.ft_right{
+    display: inline-block;
+    margin-left: 25%;
+}
+
+.github{
+    margin-bottom: 1em;
+}
+
+.git_icon{
+    font-size: 14pt;
+}
+
+.git_link{
+    margin-left: 0.5rem;
+}
+
+.fontawesome:hover a{
+    color: var(--a-link-hover);
+}
+
+.fontawesome:hover .icon_heart{
+    color: var(--red);
+}
+
+.icon_heart{
+    transition: color 0.1s ease-in;
+}

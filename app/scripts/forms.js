@@ -274,7 +274,7 @@ function incrementarLikes(muffin){
     datos["botonLikes"] = true
     datos["id"]=muffin;
     console.log(datos)
-    send_POST_form(server, datos);
+    setTimeout(()=>{send_POST_form(server, datos)}, 500);
 }
 
 function abrirOpciones(muffin){

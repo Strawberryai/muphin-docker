@@ -1,0 +1,20 @@
+body{
+    background: var(--bg-b);
+}
+
+.cat_title{
+    padding: 2rem;
+    background: var(--bg-a);
+    border-top: 1px solid var(--border-a);
+    color: var(--text-b);
+}
+
+.cat_title h1{
+    margin: 0;
+    display: inline;
+}
+
+.cat_title form{
+    display: inline-block;
+    float: right;
+}

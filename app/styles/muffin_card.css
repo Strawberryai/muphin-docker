@@ -1,5 +1,4 @@
 .muffin_section{
-    background: var(--bg-muffin-section);
     display: flex;
     flex-wrap: wrap;
     width: 100%;

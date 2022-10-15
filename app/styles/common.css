@@ -5,19 +5,19 @@
 
     --bg-active: #FFAB00;
     --bg-barhover: #111;
-    --bg-muffin-section: grey;
-    --bg-muffin-card: #002a3a;
+    --bg-muffin-card: #22262c;
 
     --text-a: #000;
     --text-b: #fff;
     --text-muffin-card: #fff;
 
     --border-a: #434b57;
-    --border-muffin-img: #fff;
+    --border-muffin-img: #434b57;
 
     --red: #ff5555;
     --heart-focused: #ff5555;
     --a-link: #2edba5;
+    --a-link-hover: #21c18f;
 
     /*tiempos de animaciones*/
     --title-hi: 0.5s;
@@ -37,5 +37,10 @@ body{
 a{
     text-decoration: none;
     color: var(--a-link);
+    transition: color 0.1s ease-in;
 }
 
+a:hover{
+    color: var(--a-link-hover);
+
+}

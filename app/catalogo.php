@@ -3,6 +3,7 @@ session_start();
 require('Database.php');
 $db = Database::getInstance();
 $content = "";
+$add_button = "";
 
 if(isset($_POST['confirmar-añadirmuffin'])){
     //El usuario quiere registrar un muffin
@@ -187,7 +188,9 @@ elseif(isset($_POST['botonEdit'])){
 else{
     // Pagina principal donde se listan los muffins
     require('components/muffin_card.php');
-    $content = get_muffin_screen();
+    require('components/footer.php');
+    $content = get_muffin_screen() . get_footer();
+    $add_button = get_add_muffin_button();
 }
 
 ?>
@@ -211,6 +214,8 @@ else{
         <link rel="stylesheet" href="/styles/nav_bar.css?version=0.1">
         <link rel="stylesheet" href="/styles/form.css?version=0.1">
         <link rel="stylesheet" href="/styles/muffin_card.css?version=0.1">
+        <link rel="stylesheet" href="/styles/footer.css?version=0.1">
+        <link rel="stylesheet" href="/styles/catalogo.css?version=0.1">
 
         <!-- Incluimos unas fuentes online -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,9 +229,13 @@ else{
         <?php require_once("components/nav_bar.php")?>
 
         <!-- Contenido de la página -->
-        <h1>Catálogo de muffins</h1>
+        <section class="cat_title">
+            <h1>Catálogo de muffins</h1>
+            <?php echo $add_button; ?>
+        </section>
 
         <?php echo $content; ?>
+
 
         <!-- Scripts de la página -->
         <script src="scripts/nav_bar.js"></script>
