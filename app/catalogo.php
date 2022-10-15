@@ -4,6 +4,7 @@ require('Database.php');
 $db = Database::getInstance();
 $content = "";
 $add_button = "";
+$id;
 
 if(isset($_POST['confirmar-añadirmuffin'])){
     //El usuario quiere registrar un muffin
@@ -80,7 +81,8 @@ elseif(isset($_POST['modificarMuf'])){
     require('components/muffin_card.php');
     unset($_POST['modificarMuf']);
     unset($datos);
-    $datos['id']= $_POST['id'];
+    $datos['id']= $_SESSION['id'];
+    unset($_SESSION['id']);
     $datos['titulo'] = $_POST['titulo'];
     $datos['imagen'] = $_POST['imagen'];
     $datos['likes'] = $_POST['likes'];
@@ -129,12 +131,12 @@ elseif(isset($_POST['botonEdit'])){
     require('components/muffin_card.php');
     unset($_POST['botonEdit']);
     $datos=$_POST['id'];
+    $_SESSION['id']=$_POST['id'];
     $datos=$db->obtener_datos_muffin($datos);
     $content = get_muffin_screen();
     $directory = "images/TIPOS";                                       //location of directory with files
     $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
     $files = array_map("htmlspecialchars",$scanned_directory);
-
     $options = "";
     foreach ($files as $file){
         $options = $options . "<option value='{$file}'>{$file}</option>";
@@ -167,10 +169,6 @@ elseif(isset($_POST['botonEdit'])){
             <select id='imagen' name='imagen' >{$options}</select>
         </div>
 
-        <div class='form-item'>
-            <label for='id'>Id de tu muffin:</label>
-            <input id='id' name='id' type='text' value='{$datos['id']}'>
-        </div>
 
         <div class='form-item'>
             <button type='submit' name='modificarMuf' value='Submit'>Modificar datos</button>
