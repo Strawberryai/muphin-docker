@@ -1,7 +1,7 @@
 <?php
 // Pagina para modificar los datos del usuario
 session_start();
-
+header('Content-Type: text/html; charset=utf-8');
 require('Database.php');
 $db = Database::getInstance();
 
@@ -70,17 +70,25 @@ if(!isset($_SESSION['user'])){
 
     // Pedimos al usuario que vuelva a ingresar su contraseña
     $form = "
-    <form action='perfil.php' method='POST'>
-        <div class='form-item'>
-            <label for='password'>Confirma tu contraseña:</label>
-            <input type='password' id='password' name='password' value=''>
-        </input>
-        
-        <div class='form-item'>
-            <button type='submit' name='modificar-confirmado' value='Submit'>Modificar</button>
-        </div>
-    </form>";
+    <!DOCTYPE html>
 
+    <html lang='es'>
+        <head>
+            <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+        </head>
+        <body>
+            <form action='perfil.php' method='POST'>
+                <div class='form-item'>
+                    <label for='password'>Confirma tu contraseña:</label>
+                    <input type='password' id='password' name='password' value=''>
+                    </input>
+        
+                <div class='form-item'>
+                    <button type='submit' name='modificar-confirmado' value='Submit'>Modificar</button>
+                </div>
+            </form>
+        </body>
+    </html>";
 }elseif(isset($_POST['eliminar-confirmado'])){
     // Hemos recibido una peticion para eliminar el usuario y se ha confirmado
     // con contraseña (aún no sabemos si es correcta)

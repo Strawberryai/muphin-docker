@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+header('Content-Type: text/html; charset=utf-8');
 require('Database.php');
 $db = Database::getInstance();
 
@@ -37,9 +38,10 @@ if(isset($_SESSION['user'])){
 }else{
 ?>
 <!DOCTYPE html>
-<html lang="en">
-    <head>
 
+<html lang="es">
+    <head>
+        <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
         <title>Muffin</title>
         <link rel="icon" href="/images/muffin.ico">
 
