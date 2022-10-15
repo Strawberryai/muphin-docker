@@ -25,9 +25,12 @@ function get_muffin_screen(){
                     <div class='muffin_title'>{$muffin['titulo']}</div>
 
                     <div class='muffin_like_section'> 
-                        <i id='{$muffin['id']}_button' class='fa-solid fa-heart muffin_heart' name='botonLikes' onclick='incrementarLikes(". '"' . $muffin['id'] . '"' . ")'></i>
+                        
+                        <i id='{$muffin['id']}_button' class='fa-solid fa-heart' name='botonLikes'
+                            muffin_heart' onclick='incrementarLikes(". '"' . $muffin['id'] . '"' . ")'></i>
                         <span class='muffin_like_num'>Likes: {$muffin['likes']}</span>
-                    </div>
+                        
+                        </div>
                     <p>{$muffin['descripcion']}</p>
 
                 </div>

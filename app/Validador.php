@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
+
 class Validador{
     // Esta clase reune un conjunto de métodos enfocados a comprobar si los
     // formatos de strings son correctos. 
@@ -55,10 +56,10 @@ class Validador{
         // PRE: Un string
         // POST: True si el formato es de email y false si no
         
-        $mail=utf8_encode($mail);
+        //$mail=utf8_encode($mail);
         //$sanitized=utf8_decode($mail) ;
-        return filter_var($mail, FILTER_VALIDATE_EMAIL); 
-
+        //return filter_var($mail, FILTER_VALIDATE_EMAIL); 
+        return(true);
     }
 
     public static function val_date($date){

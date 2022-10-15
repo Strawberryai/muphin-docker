@@ -185,10 +185,13 @@ class Database{
         // Comprobar que el nombre de usuario es único
         if(strcmp($datos['username'], "") != 0){
             // El username no es un string vacío
-            if(strcmp($user, $datos['username']) != 0 && $this->existe_nombre_usuario($datos['username'])){
-                return "ERROR: el nombre de usuario introducido ya está registrado";
+            if($user==$datos['username']){
+                if(strcmp($user, $datos['username']) != 0 && $this->existe_nombre_usuario($datos['username'])){
+                    return "ERROR: el nombre de usuario introducido ya está registrado";
+                } 
             }
-        }else{
+        }
+        else{
             return "ERROR: el nombre de usuario no puede ser una cadena vacía";
 
         }
