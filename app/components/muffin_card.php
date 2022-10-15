@@ -4,12 +4,8 @@ function get_muffin_screen(){
     $muffins = $db->obtener_muffins();
 
     $content = "
-        <form action='catalogo.php' method='POST'>
-            <button type='submit' name='añadirmuffin' value='añadir muffin'>Añadir muffin</button>
-        </form>
         <section class='muffin_section'>
-    ";
-
+";
     $list = "";
 
     foreach($muffins as $muffin){
@@ -29,8 +25,7 @@ function get_muffin_screen(){
                     <div class='muffin_title'>{$muffin['titulo']}</div>
 
                     <div class='muffin_like_section'> 
-                        <i id='{$muffin['id']}_button' class='fa-solid fa-heart name='botonLikes'
-                            muffin_heart' onclick='incrementarLikes(". '"' . $muffin['id'] . '"' . ")'></i>
+                        <i id='{$muffin['id']}_button' class='fa-solid fa-heart muffin_heart' name='botonLikes' onclick='incrementarLikes(". '"' . $muffin['id'] . '"' . ")'></i>
                         <span class='muffin_like_num'>Likes: {$muffin['likes']}</span>
                     </div>
                     <p>{$muffin['descripcion']}</p>
@@ -48,5 +43,14 @@ function get_muffin_screen(){
     return $content;
 }
 
+function get_add_muffin_button(){
+    $content = "
+        <form action='catalogo.php' method='POST'>
+            <button type='submit' name='añadirmuffin' value='añadir muffin'>Añadir muffin</button>
+        </form>
+    ";
+
+    return $content;
+}
 
 ?>

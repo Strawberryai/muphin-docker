@@ -16,6 +16,7 @@ session_start();
         <link rel="stylesheet" href="/styles/common.css?version=0.1">
         <link rel="stylesheet" href="/styles/main.css?version=0.1">
         <link rel="stylesheet" href="/styles/nav_bar.css?version=0.1">
+        <link rel="stylesheet" href="/styles/footer.css?version=0.1">
 
         <!-- Incluimos unas fuentes online -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,14 +64,18 @@ session_start();
                 </div>
             </div>
         </section>
-        <footer id="final">
-            <h2>Final de la pagina</h2>
 
-        </footer>
+        <!-- Incluimos el footer-->
+        <?php 
+            require("components/footer.php");
+            echo get_footer();
+
+        ?>
 
         
         <!-- Incluimos los scripts necesarios -->
         <script src="/scripts/nav_bar.js"></script>
         <script src="/scripts/main.js"></script>
+        <script src="https://kit.fontawesome.com/32457df416.js" crossorigin="anonymous"></script>
     </body>
 </html>
