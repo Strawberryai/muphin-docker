@@ -74,6 +74,7 @@ elseif(isset($_POST['botonLikes'])){
     $datos['id']=$_POST['id'];
     $db->incrementarLikes($datos);
     $content = get_muffin_screen();
+    header("Location:catalogo.php");
 }
 elseif(isset($_POST['modificarMuf'])){
     require('components/muffin_card.php');
