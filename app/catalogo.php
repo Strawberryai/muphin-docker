@@ -70,8 +70,7 @@ if(isset($_POST['confirmar-añadirmuffin'])){
 elseif(isset($_POST['botonLikes'])){
     require('components/muffin_card.php');
     unset($_POST['botonLikes']);
-    header("Location:catalogo.php");
-    $datos=$_POST['id'];
+    $datos['id']=$_POST['id'];
     $db->incrementarLikes($datos);
     $content = get_muffin_screen();
 }
