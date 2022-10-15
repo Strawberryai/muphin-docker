@@ -121,7 +121,7 @@ elseif(isset($_POST['eliminar-confirmado'])){
     $datos=$_POST['id']; 
     $error = $db->eliminar_muffin($datos);
     $content = get_muffin_screen();
-
+    header("Location:catalogo.php");
     
     
 }
