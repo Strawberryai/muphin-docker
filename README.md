@@ -31,11 +31,11 @@ funcionalidades:
 
 1. Registro de usuarios introduciendo y comprobando el formato de los
    siguientes datos:
-    a. Nombre y apellidos (sólo texto) 
-    b. DNI (formato xxxxxxxx-Z aplicando algoritmo para comprobar la letra)
-    c. Teléfono (sólo números)
-    d. Fecha nacimiento (formato aaaa-mm-dd)
-    e. E-mail (formato e-mail válido)
+    - Nombre y apellidos (sólo texto) 
+    - DNI (formato xxxxxxxxZ aplicando algoritmo para comprobar la letra)
+    - Teléfono (sólo números)
+    - Fecha nacimiento (formato aaaa-mm-dd)
+    - E-mail (formato e-mail válido)
 
 2. Identificación en base a un nombre de usuario y contraseña
 
