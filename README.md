@@ -4,6 +4,13 @@ Este proyecto se trata de una aplicación web sobre muphins alojada en un
 conjunto de servicios corriendo en contenedores Docker. En concreto, este
 sistema está basado en una arquitectura Linux + Apache + MariaDB (MySQL) + PHP 7.2 en Docker Compose. 
 
+## Integrantes del grupo
+
+Este proyecto está compuesto por los siguientes integrantes:
+- Alan García Justel
+- Álvaro Díez-Andino
+- Adrián López Oyón
+
 ## Instrucciones para iniciar el sistema
 
 Introduce los siguientes comandos para iniciar los contenedores:
