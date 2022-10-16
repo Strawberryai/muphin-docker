@@ -120,7 +120,7 @@ elseif(isset($_POST['eliminar'])){
 elseif(isset($_POST['eliminar-confirmado'])){
     require('components/muffin_card.php');
     unset($_POST['eliminar-confirmado']);
-    $datos=$_POST['id']; 
+    $datos=$_SESSION['id']; 
     $error = $db->eliminar_muffin($datos);
     $content = get_muffin_screen();
     header("Location:catalogo.php");
