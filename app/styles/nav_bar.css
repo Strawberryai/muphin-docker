@@ -1,0 +1,68 @@
+/* Navbar styles */
+
+#top_bar{
+    background: var(--bg-a);
+    width: 100%;
+    height: min-content;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.bar_elm{
+    float: left;
+    padding:1rem 2rem;
+}
+
+.bar_elm a{
+    color: var(--text-b)
+}
+
+.bar_elm:hover:not(.active){
+    background: var(--bg-barhover);
+}
+
+.active{
+    background: var(--bg-active);
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown a{
+    color: var(--text-b);
+}
+
+.dropbtn{
+    padding-left: 1.2rem;
+}
+
+.dropdown-content {
+    visibility: hidden;
+    position: absolute;
+    background-color: var(--bg-a); 
+    color: var(--text-b);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    right: 0;
+    left: auto;
+    top: 3.1rem;
+    z-index: 1;
+    height: 0;
+    overflow: hidden;
+}
+
+.dropdown-content-hide{
+    height: 1px;
+    transition: height 0.08s ease-out;
+}
+
+.dropdown-content-show{
+    height: 75px;
+    transition: height 0.08s ease-in;
+}

@@ -1,0 +1,50 @@
+#zona-registro{
+    background: var(--bg-b);
+    width: 30%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: auto;
+    margin-top: 3rem;
+    box-shadow: 1px 1px 7px var(--border-a);
+}
+
+#form *{
+    display: block;
+}
+
+.form-item{
+    margin-top:1rem;
+}
+
+input{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+}
+
+input:focus{
+    border-color: var(--bg-active);
+    box-shadow:0 0 8px 0 var(--bg-active);
+}
+button{
+    padding: 0.5rem 2rem;
+    background: var(--bg-active);
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#eliminar{
+    background: var(--red);
+}
+
+#error{
+    color: var(--red);
+}

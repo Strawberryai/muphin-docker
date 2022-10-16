@@ -1,0 +1,75 @@
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden
+}
+
+.flex-container{
+    display: flex;
+}
+
+.tarjeta{
+    flex-grow: 1;
+    height: 300px;
+    background: var(--bg-a);
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.flex-vertical{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile{
+    margin-top: 1rem;
+}
+
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.img{
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
+.name{
+    color: var(--text-b);
+    font-size: 12pt;
+    text-align: center;
+}
+
+.info{
+    color: var(--text-b);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 16pt;
+    padding-bottom: 0.5rem;
+}
+
+.description{
+    font-size: 9pt;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.documentacion{
+    background: var(--bg-a);
+    padding: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    color: var(--text-b);
+}
