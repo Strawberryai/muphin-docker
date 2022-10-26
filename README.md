@@ -57,3 +57,5 @@ funcionalidades:
 6. Posibilidad de modificar los datos de los elementos del catálogo.
 
 7. Posibilidad de eliminar elementos del catálogo (pidiendo confirmación)
+
+
