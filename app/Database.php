@@ -48,10 +48,13 @@ class Database{
         return self::$instance;
     }
 
-    public function comprobar_identidad($user, $pass){
+    public function comprobar_identidad($user, $pass){//PARAMETRIZADA
         // TODO: Validar datos antes de realizar peticiones
-        
-        $query = $this->send_query_db("SELECT password FROM usuarios WHERE username='" . $user . "' ");
+        $sql_ins=$this->conn->prepare("SELECT password FROM usuarios WHERE username=?");
+        $sql_ins->bind_param("s",$user);
+        //$sql_ins->bind_param("ssss",$datos['titulo'],$datos['tipo'],$datos['descripcion'],$datos['user_prop']);
+        //$query = $this->send_query_db("SELECT password FROM usuarios WHERE username='" . $user . "' ");
+        $query=$sql_ins->execute();
         $identified = false;
 
         if(isset($query['password']) and strcmp($pass, $query['password']) == 0){
@@ -89,14 +92,17 @@ class Database{
             return "ERROR: el nombre de usuario no puede ser una cadena vacía";
 
         }
+        $sql_ins=$this->conn->prepare("INSERT INTO usuarios (username, password, nombre_apellidos, DNI, telf, email, fecha) VALUES (?,?,?,?,?,?,?)");
+        $sql_ins->bind_param("ssssiss",$datos['username'], $datos['password'], $datos['nombre_apellidos'], $datos['DNI'], $datos['telf'], $datos['email'], $datos['date']);
+        $res = $sql_ins->execute();
 
-        $sql_ins = "INSERT INTO usuarios (username, password, nombre_apellidos, DNI, telf, email, fecha) VALUES ('{$datos['username']}', '{$datos['password']}', '{$datos['nombre_apellidos']}', '{$datos['DNI']}', '{$datos['telf']}', '{$datos['email']}', '{$datos['date']}')";
-        $res = $this->send_query_db($sql_ins);
     }
 
     public function registrar_muffin($datos){
-        $sql_ins = "INSERT INTO muffins (titulo, imagen, descripcion, user_prop) VALUES ('{$datos['titulo']}', '{$datos['tipo']}', '{$datos['descripcion']}', '{$datos['user_prop']}')";
-        $res = $this->send_query_db($sql_ins);
+        $sql_ins=$this->conn->prepare("INSERT INTO muffins (titulo, imagen, descripcion, user_prop) VALUES(?,?,?,?)");
+        $sql_ins->bind_param("ssss",$datos['titulo'],$datos['tipo'],$datos['descripcion'],$datos['user_prop']);
+        //$sql_ins = "INSERT INTO muffins (titulo, imagen, descripcion, user_prop) VALUES ('{$datos['titulo']}', '{$datos['tipo']}', '{$datos['descripcion']}', '{$datos['user_prop']}')";
+        $res = $sql_ins->execute();
     }
 
     public function obtener_muffins(){
@@ -120,9 +126,10 @@ class Database{
     }
 
    public function modificar_datos_muffin($datos){
-        $sql_params="likes='{$datos['likes']}',imagen='{$datos['imagen']}',titulo='{$datos['titulo']}',descripcion='{$datos['descripcion']}',user_prop='{$datos['user_prop']}'";
-        $sql_ins= "UPDATE muffins SET {$sql_params} WHERE id='{$datos['id']}'";
-        $res = $this->send_query_db($sql_ins);
+        $sql_ins=$this->conn->prepare("UPDATE muffins SET likes=?,imagen=?,titulo=?,descripcion=?,user_prop=? WHERE id='{$datos['id']}'");
+        $sql_ins->bind_param("issss",$datos['likes'],$datos['imagen'],$datos['titulo'],$datos['descripcion'],$datos['user_prop']);
+        //$sql_params="likes='{$datos['likes']}',imagen='{$datos['imagen']}',titulo='{$datos['titulo']}',descripcion='{$datos['descripcion']}',user_prop='{$datos['user_prop']}'";
+        $res = $sql_ins->execute();
    }
 
    public function eliminar_muffin($id){
@@ -205,10 +212,11 @@ class Database{
         }
 
         // Enviamos una instruccion a la base de datos para modificarlos
-        $sql_ins = "UPDATE usuarios SET {$sql_params}  WHERE username='{$user}'";
-        $res = $this->send_query_db($sql_ins);
+        $sql_ins=$this->conn->prepare("UPDATE usuarios SET username=?,DNI=?,telf=?,email=?,fecha=? where username='{$user}'");
+        $sql_ins->bind_param("ssiss",$datos['username'],$datos['DNI'],$datos['telf'],$datos['email'],$datos['date']);
+        $res = $sql_ins->execute();
 
-        if(!$res){
+       if(!$res){
             return "ERROR: el UPDATE no se pudo realizar";
         }
     }
