@@ -1,6 +1,7 @@
 <?php
 
 require('Validador.php');
+require('Hasher.php');
 
 class Database{
 
@@ -54,10 +55,10 @@ class Database{
         $sql_ins->bind_param("s",$user);
         //$sql_ins->bind_param("ssss",$datos['titulo'],$datos['tipo'],$datos['descripcion'],$datos['user_prop']);
         //$query = $this->send_query_db("SELECT password FROM usuarios WHERE username='" . $user . "' ");
-        $query=$sql_ins->execute();
+        $sql_ins->execute();
+        $resul=$sql_ins->get_result()->fetch_assoc();
         $identified = false;
-
-        if(isset($query['password']) and strcmp($pass, $query['password']) == 0){
+        if(isset($resul['password']) and Hasher::verificar_password($pass,$resul['password'])){
             $identified = true;
         }
 
@@ -92,6 +93,8 @@ class Database{
             return "ERROR: el nombre de usuario no puede ser una cadena vacía";
 
         }
+        $hash=Hasher::hash_pssw($datos['password']);
+        $datos['password']=$hash;
         $sql_ins=$this->conn->prepare("INSERT INTO usuarios (username, password, nombre_apellidos, DNI, telf, email, fecha) VALUES (?,?,?,?,?,?,?)");
         $sql_ins->bind_param("ssssiss",$datos['username'], $datos['password'], $datos['nombre_apellidos'], $datos['DNI'], $datos['telf'], $datos['email'], $datos['date']);
         $res = $sql_ins->execute();
