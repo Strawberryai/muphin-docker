@@ -9,6 +9,7 @@ services:
        - db
      volumes:
        - ./app:/var/www/html/
+       - ./log:/var/log/muffin/
 
   db:
     image: mariadb:10.8.2
