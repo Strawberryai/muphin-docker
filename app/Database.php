@@ -213,6 +213,14 @@ class Database{
         }
     }
 
+    public function ip_attempt($ip){
+        mysqli_query($this->conn, "INSERT INTO `ip` (`address` ,`timestamp`)VALUES ('$ip',CURRENT_TIMESTAMP)");
+        $result = mysqli_query($this->conn, "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE '$ip' AND `timestamp` > (now() - interval 1 minute)");
+        $count = mysqli_fetch_array($result, MYSQLI_NUM);
+
+        return $count[0];
+    }
+
 }
 
 ?>

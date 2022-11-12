@@ -1,7 +1,8 @@
 <?php
+session_start();
 require 'Database.php';
 require 'Logs.php';
-session_start();
+header("Content-Security-Policy: default-src 'self'");
 
 if(isset($_SESSION['user'])){
     // ya existe una sesión iniciada
@@ -11,25 +12,36 @@ if(isset($_SESSION['user'])){
     // Se ha enviado una petición de log in
     $user = $_POST['username'];
 
-    // loggeamos el intento de inicio de sesión
-    $log = new Log("log", "");
-    $log->insert("Intento de login {user: $user}");
-    
-    // Comprobamos si los datos están en nuestra base de datos
+    // Comprobamos el número de intentos de login de la ip
     $db = Database::getInstance();
-    $identified = $db->comprobar_identidad($user, $_POST['password']);
+    $count = $db->ip_attempt($_SERVER["REMOTE_ADDR"]);
+    $blocked = $count > 3;
+    $blocked_mgs = $blocked ? "True" : "False";
+    
+    // Loggeamos el intento de inicio de sesión
+    $log = new Log("log", "");
+    $log->insert("Intento de login {attempt: $count, blocked: $blocked_mgs, user: $user}");
 
-    if($identified){
-        // loggeamos el inicio de sesión
-        $log->insert("Login exitoso {user: $user}");
-        
-        // iniciamos la sesión y volvemos a la página principal
-        $_SESSION['user'] = $user;
+    //si tenemos más de 3 intentos en menos de 1 minuto no realizamos el login
+    if($blocked){
+        echo "Demasiados intentos fallidos. Espere 1 minuto para volver a intentarlo";
 
-        header('Location:index.php');
     }else{
-        // Avisamos de que no se ha podido iniciar la sesión
-        echo "No se ha podido iniciar sesión con tus credenciales";
+        // Comprobamos si los datos están en nuestra base de datos
+        $identified = $db->comprobar_identidad($user, $_POST['password']);
+
+        if($identified){
+            // loggeamos el inicio de sesión
+            $log->insert("Login exitoso {user: $user}");
+
+            // iniciamos la sesión y volvemos a la página principal
+            $_SESSION['user'] = $user;
+
+            header('Location:index.php');
+        }else{
+            // Avisamos de que no se ha podido iniciar la sesión
+            echo "No se ha podido iniciar sesión con tus credenciales";
+        }
     }
 }
 

@@ -12,38 +12,49 @@ if(isset($_SESSION['user'])){
 
 }else if(isset($_POST['register'])){
     unset($_POST['register']);
+
+    // Comprobamos el número de intentos de registro de la ip
+    $count = $db->ip_attempt($_SERVER["REMOTE_ADDR"]);
+    $blocked = $count > 3;
+
     $log = new Log("log", "");
 
-    if(strcmp($_POST['password'], $_POST['password2']) == 0){
-        $datos['username'] = $_POST['username'];
-        $datos['password'] = $_POST['password'];
-        $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
-        $datos['DNI'] = $_POST['DNI'];
-        $datos['telf'] = $_POST['telf'];
-        $datos['email'] = $_POST['email'];
-        $datos['date'] = $_POST['date'];
-
-        $error = $db->registrar_usuario($datos);
-
-        if(!isset($error)){
-            $log->insert("Registro completado user: " . $datos['username'] . "}");
-            header('Location:log_in.php');
-        }
-
-        // Hacemos algo con el error
-        $log->insert("Registro fallido {error: $error}");
-        echo $error;
+    if($blocked){
+        $log->insert("Registro fallido {error: Demasiado numero de intentos de register}");
+        echo "Demasiados intentos de register. Espere 1 minuto para volver a intentarlo";
 
     }else{
-        $log->insert("Registro fallido {error: Las contraseñas no coinciden}");
-        echo "ERROR: las contraseñas no coinciden";
-    }
+        if(strcmp($_POST['password'], $_POST['password2']) == 0){
+            $datos['username'] = $_POST['username'];
+            $datos['password'] = $_POST['password'];
+            $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
+            $datos['DNI'] = $_POST['DNI'];
+            $datos['telf'] = $_POST['telf'];
+            $datos['email'] = $_POST['email'];
+            $datos['date'] = $_POST['date'];
 
+            $error = $db->registrar_usuario($datos);
+
+            if(!isset($error)){
+                $log->insert("Registro completado user: " . $datos['username'] . "}");
+                header('Location:log_in.php');
+            }
+
+            // Hacemos algo con el error
+            $log->insert("Registro fallido {error: $error}");
+            echo $error;
+
+        }else{
+            $log->insert("Registro fallido {error: Las contraseñas no coinciden}");
+            echo "ERROR: las contraseñas no coinciden";
+        }
+
+    }
 
 }else{
 ?>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta http-equiv='content-type' content='text/html; charset=utf-8'/>

@@ -4,3 +4,18 @@
 2022-11-10 11:11:46 [ip] 172.20.0.1 [text] Intento de login {user: Pablo}
 2022-11-10 11:12:33 [ip] 172.20.0.1 [text] Intento de login {user: Pablo}
 2022-11-10 11:12:33 [ip] 172.20.0.1 [text] Login exitoso {user: Pablo}
+2022-11-12 15:05:04 [ip] 172.20.0.1 [text] Intento de login {user: P}
+2022-11-12 15:55:04 [ip] 172.20.0.1 [text] Intento de login {attempt: 1, user: P}
+2022-11-12 15:55:13 [ip] 172.20.0.1 [text] Intento de login {attempt: 2, user: P}
+2022-11-12 15:55:21 [ip] 172.20.0.1 [text] Intento de login {attempt: 3, user: P}
+2022-11-12 15:55:28 [ip] 172.20.0.1 [text] Intento de login {attempt: 4, user: P}
+2022-11-12 15:56:20 [ip] 172.20.0.1 [text] Intento de login {attempt: 3, user: Pablo}
+2022-11-12 15:57:06 [ip] 172.20.0.1 [text] Intento de login {attempt: 2, user: Aitor001}
+2022-11-12 15:57:06 [ip] 172.20.0.1 [text] Login exitoso {user: Aitor001}
+2022-11-12 16:05:41 [ip] 172.20.0.1 [text] Intento de login {user: Aitor001}
+2022-11-12 16:07:32 [ip] 172.20.0.1 [text] Intento de login {attempt: 1, blocked: , user: Aitor001}
+2022-11-12 16:07:32 [ip] 172.20.0.1 [text] Login exitoso {user: Aitor001}
+2022-11-12 16:09:30 [ip] 172.20.0.1 [text] Logout {user: Aitor001}
+2022-11-12 16:09:51 [ip] 172.20.0.1 [text] Intento de login {attempt: 1, blocked: False, user: Aitor001}
+2022-11-12 16:09:51 [ip] 172.20.0.1 [text] Login exitoso {user: Aitor001}
+2022-11-12 16:10:09 [ip] 172.20.0.1 [text] Logout {user: Aitor001}
