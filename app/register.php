@@ -2,14 +2,30 @@
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 header("Content-Security-Policy: default-src 'self'; font-src fonts.gstatic.com https://ka-f.fontawesome.com 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; script-src 'self' https://kit.fontawesome.com; connect-src 'self' https://ka-f.fontawesome.com");
+if (empty($_SESSION['_token'])) {
+    if (function_exists('mcrypt_create_iv')) {
+      $_SESSION['_token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+    } 
+    else {
+      $_SESSION['_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+    }
+}
 
 require('Logs.php');
+$token = $_SESSION['_token'];
+header('Content-Type: text/html; charset=utf-8');
 require('Database.php');
 $db = Database::getInstance();
 
 if(isset($_SESSION['user'])){
-    // Estamos loggeados -> volvemos a la página principal
-    header("Location:index.php");
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            header("Location:index.php"); // Estamos loggeados -> volvemos a la página principal
+        } else {
+            echo "error  LOGEAR POSIBLE MALICIOSO";
+        }
+    }
+    
 
 }else if(isset($_POST['register'])){
     unset($_POST['register']);
@@ -25,32 +41,35 @@ if(isset($_SESSION['user'])){
         echo "Demasiados intentos de register. Espere 1 minuto para volver a intentarlo";
 
     }else{
-        if(strcmp($_POST['password'], $_POST['password2']) == 0){
-            $datos['username'] = $_POST['username'];
-            $datos['password'] = $_POST['password'];
-            $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
-            $datos['DNI'] = $_POST['DNI'];
-            $datos['telf'] = $_POST['telf'];
-            $datos['email'] = $_POST['email'];
-            $datos['date'] = $_POST['date'];
-
-            $error = $db->registrar_usuario($datos);
-
-            if(!isset($error)){
-                $log->insert("Registro completado user: " . $datos['username'] . "}");
-                header('Location:log_in.php');
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            if(strcmp($_POST['password'], $_POST['password2']) == 0){
+                $datos['username'] = $_POST['username'];
+                $datos['password'] = $_POST['password'];
+                $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
+                $datos['DNI'] = $_POST['DNI'];
+                $datos['telf'] = $_POST['telf'];
+                $datos['email'] = $_POST['email'];
+                $datos['date'] = $_POST['date'];
+        
+                $error = $db->registrar_usuario($datos);
+        
+                if(!isset($error)){
+                    header('Location:log_in.php');
+                }
+        
+                // Hacemos algo con el error
+                echo $error;
+        
+            }else{
+                echo "ERROR: las contraseñas no coinciden";
             }
-
-            // Hacemos algo con el error
-            $log->insert("Registro fallido {error: $error}");
-            echo $error;
-
-        }else{
-            $log->insert("Registro fallido {error: Las contraseñas no coinciden}");
-            echo "ERROR: las contraseñas no coinciden";
+        } else {
+            echo "error  LOGEAR POSIBLE MALICIOSO";
         }
 
     }
+    
 
 }else{
 ?>
@@ -127,6 +146,10 @@ if(isset($_SESSION['user'])){
                     <label for="password">Repeat password:</label>
                     <input type="password" id="password2" name="password2" placeholder="Repeat your password" value="">
                     <span id=errorPassword2 style="color:red"></span>
+                </div>
+
+                <div class="form-item">
+                    <input name="_token" id="_token" type="hidden" value="<?php echo $_SESSION['_token']; ?>">
                 </div>
 
                 <div class="form-item">

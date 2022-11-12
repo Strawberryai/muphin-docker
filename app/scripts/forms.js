@@ -18,7 +18,8 @@ function validar_y_enviar_datos(){
     let email   = document.getElementById('email') 
     let pass    = document.getElementById('password') 
     let pass2   = document.getElementById('password2') 
-    let button  = document.getElementById('button') 
+    let button  = document.getElementById('button')
+    let token   = document.getElementById('_token') 
 
     // Tomamos los elementos de output para los errores
     let errUser     = document.getElementById('errorUsername') 
@@ -43,7 +44,7 @@ function validar_y_enviar_datos(){
     }
 
     data[type] = true
-
+    data["_token"]=_token.value
     // Comprobamos los campos y los validamos
     if(user){
         if(user.value==""){
@@ -204,7 +205,8 @@ function validar_y_añadir_muffin(){
     let button  = document.getElementById("button")
     let errorTitulo=document.getElementById("errorTitulo")
     let titulo=document.getElementById("titulo")
-    
+    let token   = document.getElementById('_token') 
+    datos["_token"]=_token.value
     if(button){
         type = button.name;
     }else{
