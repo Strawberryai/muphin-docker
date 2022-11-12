@@ -26,3 +26,8 @@
 2022-11-12 18:19:39 [ip] 172.20.0.1 [text] Intento de login {attempt: 1, blocked: False, user: Alan}
 2022-11-12 18:19:39 [ip] 172.20.0.1 [text] Login exitoso {user: Alan}
 2022-11-12 18:19:46 [ip] 172.20.0.1 [text] Logout {user: Alan}
+2022-11-12 18:23:50 [ip] 172.20.0.1 [text] Intento de login {attempt: 2, blocked: False, user: Pablo}
+2022-11-12 18:23:50 [ip] 172.20.0.1 [text] Login exitoso {user: Pablo}
+2022-11-12 18:25:18 [ip] 172.20.0.1 [text] Logout {user: Pablo}
+2022-11-12 18:26:20 [ip] 172.20.0.1 [text] Intento de login {attempt: 2, blocked: False, user: Mikel}
+2022-11-12 18:26:20 [ip] 172.20.0.1 [text] Login exitoso {user: Mikel}

@@ -57,10 +57,8 @@ CREATE TABLE `ip` (
 -- Volcado de datos para la tabla `usuarios`
 --
 INSERT INTO `usuarios` (`username`, `password`, `nombre_apellidos`, `DNI`, `telf`, `email`, `fecha`) VALUES
-('Mikel001', 'test', 'Mikel García', '11111111Z', '111111111', 'mikel001@mail.com', '2022-10-06'),
-('Mikel002', 'test', 'Mikel García2', '22222222Z', '222222222', 'mikel002@mail.com', '2022-10-07'),
-('Mikel003', 'test', 'Mikel García3', '33333333Z', '333333333', 'mikel003@mail.com', '2022-10-08'),
-('Aitor001', 'test', 'Aitor Viñedo', '11111111Z', '111111111', 'aitor001@mail.com', '2022-10-09');
+('Pablo', '$2y$10$3Qm5SWNHHndVwGeJfis6wOmybppqr.6T2MsfwpJlQKxvdE/osIika', 'Manue', '11111111H', '123456789', 'pablo@mail.com', '2022-10-06'),
+('Mikel', '$2y$10$gDQ0fUW4viiVj7PHox1tJ.LVmW7zkjM1IxaH01dwT9lIwg95ZD08G', 'Viñedo', '11111111H', '123456789', 'mikel@mail.com', '2022-10-09');
 
 
 INSERT INTO `muffins` (`imagen`,`titulo`,`descripcion`,`likes`,`user_prop`) VALUES ('Muffin con crema','Muffin a la blanquesina','Delicioso muffin con crema de leche por encima y ligero sabor a limon','2222','Alvaro Diez'),('Muffin de Choco','Muffin bronceado','Muffin achocolatado bajo en azucares y libre de edulcorantes pero con mucho MUCHO chocolate','1233','Alan Garcia'),('Muffin frutoso','Muffin del bosque','Un bocado a este muffin es como teletransportarte a un bosque y disfrutar de la naturaleza','673','Mikel Egaña'),('MuffinNormal','Muffin principiante','Muffin basico, he tardado solo 30 minutos en hacerlos!','122','Adrian Lopez'),('Muffin de Linux','Open source','Delicioso muffin con el que saborearas la libertad del software hecho muffin','9999','OpenSource');
