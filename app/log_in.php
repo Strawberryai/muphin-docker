@@ -1,14 +1,33 @@
 <?php
 require 'Database.php';
 session_start();
+if (empty($_SESSION['_token'])) {
+    if (function_exists('mcrypt_create_iv')) {
+      $_SESSION['_token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+    } 
+    else {
+      $_SESSION['_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+    }
+}
 
+$token = $_SESSION['_token'];
 if(isset($_SESSION['user'])){
-    // ya existe una sesión iniciada
-    header('Location:index.php');
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            header('Location:index.php');// ya existe una sesión iniciada
+        } else {
+            echo "error  LOGEAR POSIBLE MALICIOSO";
+        }
+    }
+    
+    
 
 }elseif(isset($_POST['login'])){
-    // Se ha enviado una petición de log in
-    $user = $_POST['username'];
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+          // Procesar el formulario
+
+          $user = $_POST['username'];
 
     // Comprobamos si los datos están en nuestra base de datos
     $db = Database::getInstance();
@@ -23,6 +42,17 @@ if(isset($_SESSION['user'])){
         // Avisamos de que no se ha podido iniciar la sesión
         echo "No se ha podido iniciar sesión con tus credenciales";
     }
+        } else {
+          // Posible petición malintencionada
+          // Se recomienda guardar este acceso en un log
+        }
+      }
+      else{
+        echo "token no generado";
+        echo $_POST['_token'];
+      }
+    // Se ha enviado una petición de log in
+    
 }
 
 ?>
@@ -61,8 +91,16 @@ if(isset($_SESSION['user'])){
                     <span id=errorPassword style="color:red"></span>
                 </div>
                 <div class="form-item">
+                    <input name="_token" id="_token" type="hidden" value="<?php echo $_SESSION['_token']; ?>">
+                </div>
+               
+
+                <div class="form-item">
                     <button type="button" id="button" name="login" onclick="validar_y_enviar_datos()">Log in</button>
                 </div>
+                
+                
+
             </form>
         </div>
 

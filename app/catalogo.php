@@ -1,5 +1,15 @@
 <?php
 session_start();
+if (empty($_SESSION['_token'])) {
+    if (function_exists('mcrypt_create_iv')) {
+      $_SESSION['_token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+    } 
+    else {
+      $_SESSION['_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+    }
+}
+
+$token = $_SESSION['_token'];
 require('Database.php');
 $db = Database::getInstance();
 $content = "";
@@ -7,33 +17,42 @@ $add_button = "";
 $id;
 
 if(isset($_POST['confirmar-añadirmuffin'])){
-    //El usuario quiere registrar un muffin
     unset($_POST['añadirmuffin']);
-    $datos['titulo'] = $_POST['titulo'];
-    $datos['tipo'] = $_POST['tipo'];
-    $datos['descripcion'] = $_POST['descripcion'];
-    if(isset($_SESSION['user'])){
-        $datos['user_prop']=$_SESSION['user'];
-    }
-    else{
+    //El usuario quiere registrar un muffin
+
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            $datos['titulo'] = $_POST['titulo'];
+        $datos['tipo'] = $_POST['tipo'];
+        $datos['descripcion'] = $_POST['descripcion'];
+        if(isset($_SESSION['user'])){
+            $datos['user_prop']=$_SESSION['user'];
+        }
+        else{
         $datos['user_prop']='Anonimo';
-    }
+        }
     
-    $error = $db->registrar_muffin($datos);
+        $error = $db->registrar_muffin($datos);
 
-    $content = "";
+        $content = "";
 
-    if(!isset($error)){
-        // Si no hay error modificamos la sesión y volvemos a la página principal
-        header('Location:catalogo.php');
-    }
-    echo $error;
+        if(!isset($error)){
+            // Si no hay error modificamos la sesión y volvemos a la página principal
+            header('Location:catalogo.php');
+        }
+        echo $error;
 
+            } else {
+                echo "error  LOGEAR POSIBLE MALICIOSO";
+            }
+        }
+    
+    
     // Hacemos algo con el error
-}elseif(isset($_POST['añadirmuffin'])){
-
-    // Listado de muffins (pagina inicial)
-    $directory = "images/TIPOS";                                       //location of directory with files
+}   elseif(isset($_POST['añadirmuffin'])){
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            $directory = "images/TIPOS";                                       //location of directory with files
     $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
     $files = array_map("htmlspecialchars",$scanned_directory);
 
@@ -61,12 +80,26 @@ if(isset($_POST['confirmar-añadirmuffin'])){
                     <input type='text' id='descripcion' name='descripcion' placeholder='Introduzca la descripción' value=''>
                     <span id='errorDescripcion' style='color:red'></span>
                 </div>
+
+                <div class='form-item'>
+                    <input name='_token' id='_token' type='hidden' value=".$_SESSION['_token'].">
+                </div>
+
                 <div class='form-item'>
                     <button type='button' id='button' name='confirmar-añadirmuffin' value='Añadir muffin' onclick='validar_y_añadir_muffin()'>Añadir muffin</button>
                 </div>
             </form>
         </div>
 ";
+       
+
+    // Listado de muffins (pagina inicial)
+    
+        } else {
+            echo "error  LOGEAR POSIBLE MALICIOSO";
+        }
+    }
+    
 
 }
 elseif(isset($_POST['botonLikes'])){
