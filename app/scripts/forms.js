@@ -19,7 +19,7 @@ function validar_y_enviar_datos(){
     let pass    = document.getElementById('password') 
     let pass2   = document.getElementById('password2') 
     let button  = document.getElementById('button')
-    let token   = document.getElementById('_token') 
+    let _token   = document.getElementById('_token') 
 
     // Tomamos los elementos de output para los errores
     let errUser     = document.getElementById('errorUsername') 
@@ -205,7 +205,7 @@ function validar_y_añadir_muffin(){
     let button  = document.getElementById("button")
     let errorTitulo=document.getElementById("errorTitulo")
     let titulo=document.getElementById("titulo")
-    let token   = document.getElementById('_token') 
+    let _token   = document.getElementById('_token') 
     datos["_token"]=_token.value
     if(button){
         type = button.name;
