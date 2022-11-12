@@ -52,68 +52,66 @@ if(isset($_POST['confirmar-añadirmuffin'])){
     
     
     // Hacemos algo con el error
-}   elseif(isset($_POST['añadirmuffin'])){
+}elseif(isset($_POST['añadirmuffin'])){
     if (!empty($_POST['_token'])) {
         if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
             $directory = "images/TIPOS";                                       //location of directory with files
-    $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
-    $files = array_map("htmlspecialchars",$scanned_directory);
+            $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
+            $files = array_map("htmlspecialchars",$scanned_directory);
 
-    $options = "";
-    foreach ($files as $file){
-        $options = $options . "<option value='{$file}'>{$file}</option>";
-    } 
+            $options = "";
+            foreach ($files as $file){
+                $options = $options . "<option value='{$file}'>{$file}</option>";
+            } 
 
-    $content = "
-        <div id='zona-añadir muffin'>
-            <form id='form' action='catalogo.php' method='POST'>
-                <div class='form-item'>
-                    <label for='titulo'>Titulo:</label>
-                    <input type='text' id='titulo' name='titulo' placeholder='Introduzca el titulo de tu muffinn' >
-                    
-                    <span id='errorTitulo' style='color:red'></span>
-                </div>
-                <div class='form-item'>
-                    <label for='tipo'>Tipo:</label>
-                    <select id='tipo' name='tipo'>{$options}</select>
-                    <span id='errorTipo' style='color:red'></span>
-                </div>
-                <div class='form-item'>
-                    <label for='descripcion'>Descripción:</label>
-                    <input type='text' id='descripcion' name='descripcion' placeholder='Introduzca la descripción' value=''>
-                    <span id='errorDescripcion' style='color:red'></span>
-                </div>
+            $content = "
+                <div id='zona-añadir muffin'>
+                    <form id='form' action='catalogo.php' method='POST'>
+                        <div class='form-item'>
+                            <label for='titulo'>Titulo:</label>
+                            <input type='text' id='titulo' name='titulo' placeholder='Introduzca el titulo de tu muffinn' >
+                            
+                            <span id='errorTitulo' style='color:red'></span>
+                        </div>
+                        <div class='form-item'>
+                            <label for='tipo'>Tipo:</label>
+                            <select id='tipo' name='tipo'>{$options}</select>
+                            <span id='errorTipo' style='color:red'></span>
+                        </div>
+                        <div class='form-item'>
+                            <label for='descripcion'>Descripción:</label>
+                            <input type='text' id='descripcion' name='descripcion' placeholder='Introduzca la descripción' value=''>
+                            <span id='errorDescripcion' style='color:red'></span>
+                        </div>
 
-                <div class='form-item'>
-                    <input name='_token' id='_token' type='hidden' value=".$_SESSION['_token'].">
-                </div>
+                        <div class='form-item'>
+                            <input name='_token' id='_token' type='hidden' value=".$_SESSION['_token'].">
+                        </div>
 
-                <div class='form-item'>
-                    <button type='button' id='button' name='confirmar-añadirmuffin' value='Añadir muffin' onclick='validar_y_añadir_muffin()'>Añadir muffin</button>
+                        <div class='form-item'>
+                            <button type='button' id='button' name='confirmar-añadirmuffin' value='Añadir muffin' onclick='validar_y_añadir_muffin()'>Añadir muffin</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-";
-       
+        ";
+               
 
-    // Listado de muffins (pagina inicial)
+            // Listado de muffins (pagina inicial)
     
         } else {
             echo "error  LOGEAR POSIBLE MALICIOSO";
         }
     }
-    
 
-}
-elseif(isset($_POST['botonLikes'])){
+}elseif(isset($_POST['botonLikes'])){
     require('components/muffin_card.php');
     require('components/footer.php');
     unset($_POST['botonLikes']);
     $datos['id']=$_POST['id'];
     $db->incrementarLikes($datos);
     $content = get_muffin_screen() . get_footer();
-}
-elseif(isset($_POST['modificarMuf'])){
+
+}elseif(isset($_POST['modificarMuf'])){
     require('components/muffin_card.php');
     unset($_POST['modificarMuf']);
     unset($datos);
@@ -128,9 +126,7 @@ elseif(isset($_POST['modificarMuf'])){
     $content = get_muffin_screen();
     header("Location:catalogo.php");
     
-}
-
-elseif(isset($_POST['eliminar'])){
+}elseif(isset($_POST['eliminar'])){
     unset($_POST['eliminar']);
     $datos['id']= $_POST['id'];
     $datos['titulo'] = $_POST['titulo'];
@@ -149,11 +145,7 @@ elseif(isset($_POST['eliminar'])){
     </form>
     ";
 
-    
-    
-}
-
-elseif(isset($_POST['eliminar-confirmado'])){
+}elseif(isset($_POST['eliminar-confirmado'])){
     require('components/muffin_card.php');
     unset($_POST['eliminar-confirmado']);
     $datos=$_SESSION['id']; 
@@ -161,9 +153,7 @@ elseif(isset($_POST['eliminar-confirmado'])){
     $content = get_muffin_screen();
     header("Location:catalogo.php");
     
-    
-}
-elseif(isset($_POST['botonEdit'])){
+}elseif(isset($_POST['botonEdit'])){
     require('components/muffin_card.php');
     unset($_POST['botonEdit']);
     $datos=$_POST['id'];
@@ -216,10 +206,7 @@ elseif(isset($_POST['botonEdit'])){
 
     ";
     
-}
-
-
-else{
+}else{
     // Pagina principal donde se listan los muffins
     require('components/muffin_card.php');
     require('components/footer.php');
@@ -228,7 +215,6 @@ else{
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

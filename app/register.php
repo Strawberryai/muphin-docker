@@ -2,6 +2,9 @@
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 header("Content-Security-Policy: default-src 'self'; font-src fonts.gstatic.com https://ka-f.fontawesome.com 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; script-src 'self' https://kit.fontawesome.com; connect-src 'self' https://ka-f.fontawesome.com");
+require('Logs.php');
+require('Database.php');
+
 if (empty($_SESSION['_token'])) {
     if (function_exists('mcrypt_create_iv')) {
       $_SESSION['_token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
@@ -11,10 +14,7 @@ if (empty($_SESSION['_token'])) {
     }
 }
 
-require('Logs.php');
 $token = $_SESSION['_token'];
-header('Content-Type: text/html; charset=utf-8');
-require('Database.php');
 $db = Database::getInstance();
 
 if(isset($_SESSION['user'])){
@@ -25,7 +25,6 @@ if(isset($_SESSION['user'])){
             echo "error  LOGEAR POSIBLE MALICIOSO";
         }
     }
-    
 
 }else if(isset($_POST['register'])){
     unset($_POST['register']);
@@ -41,36 +40,35 @@ if(isset($_SESSION['user'])){
         echo "Demasiados intentos de register. Espere 1 minuto para volver a intentarlo";
 
     }else{
-    if (!empty($_POST['_token'])) {
-        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
-            if(strcmp($_POST['password'], $_POST['password2']) == 0){
-                $datos['username'] = $_POST['username'];
-                $datos['password'] = $_POST['password'];
-                $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
-                $datos['DNI'] = $_POST['DNI'];
-                $datos['telf'] = $_POST['telf'];
-                $datos['email'] = $_POST['email'];
-                $datos['date'] = $_POST['date'];
-        
-                $error = $db->registrar_usuario($datos);
-        
-                if(!isset($error)){
-                    header('Location:log_in.php');
+        if (!empty($_POST['_token'])) {
+            if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+                if(strcmp($_POST['password'], $_POST['password2']) == 0){
+                    $datos['username'] = $_POST['username'];
+                    $datos['password'] = $_POST['password'];
+                    $datos['nombre_apellidos'] = $_POST['nombre_apellidos'];
+                    $datos['DNI'] = $_POST['DNI'];
+                    $datos['telf'] = $_POST['telf'];
+                    $datos['email'] = $_POST['email'];
+                    $datos['date'] = $_POST['date'];
+            
+                    $error = $db->registrar_usuario($datos);
+            
+                    if(!isset($error)){
+                        header('Location:log_in.php');
+                    }
+            
+                    // Hacemos algo con el error
+                    echo $error;
+            
+                }else{
+                    echo "ERROR: las contraseñas no coinciden";
                 }
-        
-                // Hacemos algo con el error
-                echo $error;
-        
-            }else{
-                echo "ERROR: las contraseñas no coinciden";
+            } else {
+                echo "error  LOGEAR POSIBLE MALICIOSO";
             }
-        } else {
-            echo "error  LOGEAR POSIBLE MALICIOSO";
+
         }
-
     }
-    
-
 }else{
 ?>
 
