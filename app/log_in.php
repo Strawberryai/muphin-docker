@@ -1,5 +1,6 @@
 <?php
 require 'Database.php';
+require 'Logs.php';
 session_start();
 
 if(isset($_SESSION['user'])){
@@ -10,11 +11,18 @@ if(isset($_SESSION['user'])){
     // Se ha enviado una petición de log in
     $user = $_POST['username'];
 
+    // loggeamos el intento de inicio de sesión
+    $log = new Log("log", "");
+    $log->insert("Intento de login {user: $user}");
+    
     // Comprobamos si los datos están en nuestra base de datos
     $db = Database::getInstance();
     $identified = $db->comprobar_identidad($user, $_POST['password']);
 
     if($identified){
+        // loggeamos el inicio de sesión
+        $log->insert("Login exitoso {user: $user}");
+        
         // iniciamos la sesión y volvemos a la página principal
         $_SESSION['user'] = $user;
 

@@ -2,6 +2,7 @@
 session_start();
 
 header('Content-Type: text/html; charset=utf-8');
+require('Logs.php');
 require('Database.php');
 $db = Database::getInstance();
 
@@ -11,6 +12,7 @@ if(isset($_SESSION['user'])){
 
 }else if(isset($_POST['register'])){
     unset($_POST['register']);
+    $log = new Log("log", "");
 
     if(strcmp($_POST['password'], $_POST['password2']) == 0){
         $datos['username'] = $_POST['username'];
@@ -24,13 +26,16 @@ if(isset($_SESSION['user'])){
         $error = $db->registrar_usuario($datos);
 
         if(!isset($error)){
+            $log->insert("Registro completado user: " . $datos['username'] . "}");
             header('Location:log_in.php');
         }
 
         // Hacemos algo con el error
+        $log->insert("Registro fallido {error: $error}");
         echo $error;
 
     }else{
+        $log->insert("Registro fallido {error: Las contraseñas no coinciden}");
         echo "ERROR: las contraseñas no coinciden";
     }
 
