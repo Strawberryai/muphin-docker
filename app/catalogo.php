@@ -1,5 +1,6 @@
 <?php
 session_start();
+header("X-Content-Type-Options: nosniff");
 header("X-Frame-Options: DENY");
 header('setcookie("sessionid", "QmFieWxvbiA1", ["httponly" => true]); SameSite=Strict');
 header('content-type: text/html; charset=utf-8');

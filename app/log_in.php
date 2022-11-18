@@ -2,6 +2,7 @@
 session_start();
 require 'Database.php';
 require 'Logs.php';
+header("X-Content-Type-Options: nosniff");
 header("X-Frame-Options: DENY");
 header('setcookie("sessionid", "QmFieWxvbiA1", ["httponly" => true]); SameSite=Strict');
 header('Content-Type: text/html; charset=utf-8');
