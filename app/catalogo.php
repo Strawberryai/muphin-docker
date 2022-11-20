@@ -1,5 +1,21 @@
 <?php
 session_start();
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
+header('setcookie("sessionid", $_SESSION["_token"], ["httponly" => true]); SameSite=Strict');
+header('content-type: text/html; charset=utf-8');
+header("content-security-policy: default-src 'self'; frame-ancestors 'none';font-src fonts.gstatic.com https://ka-f.fontawesome.com 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; script-src 'self' https://kit.fontawesome.com 'unsafe-inline'; connect-src 'self' https://ka-f.fontawesome.com");
+
+if (empty($_SESSION['_token'])) {
+    if (function_exists('mcrypt_create_iv')) {
+      $_SESSION['_token'] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+    } 
+    else {
+      $_SESSION['_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+    }
+}
+
+$token = $_SESSION['_token'];
 require('Database.php');
 $db = Database::getInstance();
 $content = "";
@@ -7,77 +23,98 @@ $add_button = "";
 $id;
 
 if(isset($_POST['confirmar-añadirmuffin'])){
-    //El usuario quiere registrar un muffin
     unset($_POST['añadirmuffin']);
-    $datos['titulo'] = $_POST['titulo'];
-    $datos['tipo'] = $_POST['tipo'];
-    $datos['descripcion'] = $_POST['descripcion'];
-    if(isset($_SESSION['user'])){
-        $datos['user_prop']=$_SESSION['user'];
-    }
-    else{
+    //El usuario quiere registrar un muffin
+
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            $datos['titulo'] = $_POST['titulo'];
+        $datos['tipo'] = $_POST['tipo'];
+        $datos['descripcion'] = $_POST['descripcion'];
+        if(isset($_SESSION['user'])){
+            $datos['user_prop']=$_SESSION['user'];
+        }
+        else{
         $datos['user_prop']='Anonimo';
-    }
+        }
     
-    $error = $db->registrar_muffin($datos);
+        $error = $db->registrar_muffin($datos);
 
-    $content = "";
+        $content = "";
 
-    if(!isset($error)){
-        // Si no hay error modificamos la sesión y volvemos a la página principal
-        header('Location:catalogo.php');
-    }
-    echo $error;
+        if(!isset($error)){
+            // Si no hay error modificamos la sesión y volvemos a la página principal
+            header('Location:catalogo.php');
+        }
+        echo $error;
 
+            } else {
+                echo "error  LOGEAR POSIBLE MALICIOSO";
+            }
+        }
+    
+    
     // Hacemos algo con el error
 }elseif(isset($_POST['añadirmuffin'])){
+    if (!empty($_POST['_token'])) {
+        if (hash_equals($_SESSION['_token'], $_POST['_token'])) {
+            $directory = "images/TIPOS";                                       //location of directory with files
+            $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
+            $files = array_map("htmlspecialchars",$scanned_directory);
 
-    // Listado de muffins (pagina inicial)
-    $directory = "images/TIPOS";                                       //location of directory with files
-    $scanned_directory = array_diff(scandir($directory), array("..", "."));         //removes . and .. files whic$
-    $files = array_map("htmlspecialchars",$scanned_directory);
+            $options = "";
+            foreach ($files as $file){
+                $options = $options . "<option value='{$file}'>{$file}</option>";
+            } 
 
-    $options = "";
-    foreach ($files as $file){
-        $options = $options . "<option value='{$file}'>{$file}</option>";
-    } 
+            $content = "
+                <div id='zona-añadir muffin'>
+                    <form id='form' action='catalogo.php' method='POST'>
+                        <div class='form-item'>
+                            <label for='titulo'>Titulo:</label>
+                            <input type='text' id='titulo' name='titulo' placeholder='Introduzca el titulo de tu muffinn' >
+                            
+                            <span id='errorTitulo' style='color:red'></span>
+                        </div>
+                        <div class='form-item'>
+                            <label for='tipo'>Tipo:</label>
+                            <select id='tipo' name='tipo'>{$options}</select>
+                            <span id='errorTipo' style='color:red'></span>
+                        </div>
+                        <div class='form-item'>
+                            <label for='descripcion'>Descripción:</label>
+                            <input type='text' id='descripcion' name='descripcion' placeholder='Introduzca la descripción' value=''>
+                            <span id='errorDescripcion' style='color:red'></span>
+                        </div>
 
-    $content = "
-        <div id='zona-añadir muffin'>
-            <form id='form' action='catalogo.php' method='POST'>
-                <div class='form-item'>
-                    <label for='titulo'>Titulo:</label>
-                    <input type='text' id='titulo' name='titulo' placeholder='Introduzca el titulo de tu muffinn' >
-                    
-                    <span id='errorTitulo' style='color:red'></span>
-                </div>
-                <div class='form-item'>
-                    <label for='tipo'>Tipo:</label>
-                    <select id='tipo' name='tipo'>{$options}</select>
-                    <span id='errorTipo' style='color:red'></span>
-                </div>
-                <div class='form-item'>
-                    <label for='descripcion'>Descripción:</label>
-                    <input type='text' id='descripcion' name='descripcion' placeholder='Introduzca la descripción' value=''>
-                    <span id='errorDescripcion' style='color:red'></span>
-                </div>
-                <div class='form-item'>
-                    <button type='button' id='button' name='confirmar-añadirmuffin' value='Añadir muffin' onclick='validar_y_añadir_muffin()'>Añadir muffin</button>
-                </div>
-            </form>
-        </div>
-";
+                        <div class='form-item'>
+                            <input name='_token' id='_token' type='hidden' value=".$_SESSION['_token'].">
+                        </div>
 
-}
-elseif(isset($_POST['botonLikes'])){
+                        <div class='form-item'>
+                            <button type='button' id='button' name='confirmar-añadirmuffin' value='Añadir muffin' onclick='validar_y_añadir_muffin()'>Añadir muffin</button>
+                        </div>
+                    </form>
+                </div>
+        ";
+               
+
+            // Listado de muffins (pagina inicial)
+    
+        } else {
+            echo "error  LOGEAR POSIBLE MALICIOSO";
+        }
+    }
+
+}elseif(isset($_POST['botonLikes'])){
     require('components/muffin_card.php');
     require('components/footer.php');
     unset($_POST['botonLikes']);
     $datos['id']=$_POST['id'];
     $db->incrementarLikes($datos);
     $content = get_muffin_screen() . get_footer();
-}
-elseif(isset($_POST['modificarMuf'])){
+
+}elseif(isset($_POST['modificarMuf'])){
     require('components/muffin_card.php');
     unset($_POST['modificarMuf']);
     unset($datos);
@@ -92,9 +129,7 @@ elseif(isset($_POST['modificarMuf'])){
     $content = get_muffin_screen();
     header("Location:catalogo.php");
     
-}
-
-elseif(isset($_POST['eliminar'])){
+}elseif(isset($_POST['eliminar'])){
     unset($_POST['eliminar']);
     $datos['id']= $_POST['id'];
     $datos['titulo'] = $_POST['titulo'];
@@ -113,11 +148,7 @@ elseif(isset($_POST['eliminar'])){
     </form>
     ";
 
-    
-    
-}
-
-elseif(isset($_POST['eliminar-confirmado'])){
+}elseif(isset($_POST['eliminar-confirmado'])){
     require('components/muffin_card.php');
     unset($_POST['eliminar-confirmado']);
     $datos=$_SESSION['id']; 
@@ -125,9 +156,7 @@ elseif(isset($_POST['eliminar-confirmado'])){
     $content = get_muffin_screen();
     header("Location:catalogo.php");
     
-    
-}
-elseif(isset($_POST['botonEdit'])){
+}elseif(isset($_POST['botonEdit'])){
     require('components/muffin_card.php');
     unset($_POST['botonEdit']);
     $datos=$_POST['id'];
@@ -180,10 +209,7 @@ elseif(isset($_POST['botonEdit'])){
 
     ";
     
-}
-
-
-else{
+}else{
     // Pagina principal donde se listan los muffins
     require('components/muffin_card.php');
     require('components/footer.php');
@@ -192,7 +218,6 @@ else{
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

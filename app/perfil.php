@@ -1,7 +1,11 @@
 <?php
 // Pagina para modificar los datos del usuario
 session_start();
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
 header('Content-Type: text/html; charset=utf-8');
+header("Content-Security-Policy: default-src 'self';frame-ancestors 'none'; font-src fonts.gstatic.com https://ka-f.fontawesome.com 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; script-src 'self' https://kit.fontawesome.com 'unsafe-inline'; connect-src 'self' https://ka-f.fontawesome.com");
+
 require('Database.php');
 $db = Database::getInstance();
 
