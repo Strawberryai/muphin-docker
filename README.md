@@ -4,6 +4,11 @@ Este proyecto se trata de una aplicación web sobre muphins alojada en un
 conjunto de servicios corriendo en contenedores Docker. En concreto, este
 sistema está basado en una arquitectura Linux + Apache + MariaDB (MySQL) + PHP 7.2 en Docker Compose. 
 
+Además, hemos logrado alojar nuestra web en un servidor de Google Cloud 
+haciendo uso de un servicio DNS y creando un certificado expedido por una 
+CA permitiéndonos establecer conexiones HTTPS con nuestra página. En concreto, 
+nuestra dirección es la siguiente: [http://muffin.ddns.net](https://muffin.ddns.net)
+
 ## Integrantes del grupo
 
 Este proyecto está compuesto por los siguientes integrantes:
